@@ -1,0 +1,162 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/Users/emilienlemaire/
+	..
+1588977499
+'b
+	/Users/emilienlemaire/bin/
+	..
+1588977499
+'h
+	/Users/emilienlemaire/
+	..
+1588977499
+'z
+	/Users/emilienlemaire/.config/vifm
+	..
+1588977499
+
+# Bookmarks:
+
+# TUI:
+al
+q1
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/Users/emilienlemaire/.config/nvim/rplugin/python3
+	nvimux.py
+2
+d/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+d/Users/emilienlemaire/.config/nvim/rplugin
+	..
+0
+d/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+d/Users/emilienlemaire/.config
+	nvim
+12
+d/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+d/Users/emilienlemaire/.config/nvim/rplugin
+	python3
+2
+d/Users/emilienlemaire/.config/nvim/rplugin/python3
+	..
+0
+d/Users/emilienlemaire/.config/nvim/rplugin
+	python3
+2
+d/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+d/Users/emilienlemaire/.config
+	nvim
+12
+d/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+d/Users/emilienlemaire/.config/nvim/rplugin
+	python3
+2
+d/Users/emilienlemaire/.config/nvim/rplugin/python3
+	..
+0
+d/Users/emilienlemaire/.config/nvim/rplugin
+	python3
+2
+d/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+d/Users/emilienlemaire/.config
+	vifm
+17
+d/Users/emilienlemaire/.config/vifm
+	vifmrc
+5
+d/Users/emilienlemaire/.config
+	vifm
+17
+d/Users/emilienlemaire/.config/vifm
+	vifminfo
+4
+d/Users/emilienlemaire/.config
+	vifm
+17
+d/Users/emilienlemaire/.config/vifm
+	colors
+1
+d/Users/emilienlemaire/.config/vifm/colors
+	Default.vifm
+1
+d/Users/emilienlemaire/.config/vifm
+	colors
+1
+d/Users/emilienlemaire/.config/vifm/colors
+	..
+0
+d/Users/emilienlemaire/.config/vifm
+	scripts
+2
+d/Users/emilienlemaire/.config
+	vifm
+17
+d/Users/emilienlemaire
+	Downloads
+5
+d/Users
+	emilienlemaire
+2
+d/Users/emilienlemaire
+	.lldb
+17
+d
+
+# Right window history (oldest to newest):
+D/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+D/Users/emilienlemaire/.config/nvim/rplugin
+	..
+0
+D/Users/emilienlemaire/.config/nvim
+	rplugin
+1
+D
+
+# Command line history (oldest to newest):
+:source ~/.config/vifm/vifmrc
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.0
+[F
+F
+I1
+].1
+]F
+s0

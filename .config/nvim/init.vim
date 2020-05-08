@@ -3,6 +3,7 @@
 "     GENERAL         "
 "                     "
 """""""""""""""""""""""
+
 set nocompatible
 filetype plugin indent on
 syntax on
@@ -51,6 +52,8 @@ endif
 
 let mapleader=","
 
+nnoremap <leader>rl :source ~/.config/nvim/init.vim<CR>
+
 """""REMAPPING"""""
 map <leader>t :CommandT<CR>
 
@@ -64,6 +67,7 @@ Plug 'let-def/ocp-indent-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
+Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
@@ -99,8 +103,8 @@ vmap ++ <plug>NERDCommenterToggle<CR>
 nmap ++ <plug>NERDCommenterToggle<CR>
 
 """"""""""""""""""""""""Python""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_host_prog = "/Users/emilienlemaire/anaconda3/envs/neovim2/bin/python"
-let g:python3_host_prog = "/Users/emilienlemaire/anaconda3/bin/python"
+let g:python_host_prog = "$HOME/anaconda3/envs/neovim2/bin/python"
+let g:python3_host_prog = "$HOME/anaconda3/bin/python"
 
 """"""""""""""""""""""""Coc.nvim""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set cmdheight=2
@@ -231,3 +235,4 @@ let g:livepreview_previewer = 'evince'
 """"""""""""""Vim Airline""""""""""""""
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts=1
+

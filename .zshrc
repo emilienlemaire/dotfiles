@@ -148,3 +148,4 @@ PYTHONPATH=$PYTHONPATH:/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.fr
 export PYTHONPATH
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+fpath+=${ZDOTDIR:-~}/.zsh_functions
