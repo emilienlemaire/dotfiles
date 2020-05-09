@@ -75,7 +75,9 @@ Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 Plug 'vifm/vifm.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -84,6 +86,7 @@ Plug 'w0rp/ale'
 Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
