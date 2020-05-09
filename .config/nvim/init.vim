@@ -17,7 +17,7 @@ set shiftround
 set backspace  =indent,eol,start
 set hidden
 set laststatus =2
-set display    =lastline
+set winfixwidth
 
 set showmode
 set showcmd
@@ -34,7 +34,7 @@ set splitright
 set cursorline
 set wrapscan
 set report     =0
-set synmaxcol  =200
+set synmaxcol  =4000
 
 set relativenumber
 set number
@@ -50,12 +50,16 @@ if &shell =~# 'fish$'
 	set shell=/bin/bash
 endif
 
+autocmd VimResized * :wincmd =
+
+"""""REMAPPING"""""
 let mapleader=","
 
 nnoremap <leader>rl :source ~/.config/nvim/init.vim<CR>
-
-"""""REMAPPING"""""
 map <leader>t :CommandT<CR>
+
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
 
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'calincru/flex-bison-syntax'
@@ -65,15 +69,17 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'let-def/ocp-indent-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
 Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
+Plug 'vifm/vifm.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vimlab/split-term.vim'
 Plug 'w0rp/ale'
 Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
@@ -96,6 +102,10 @@ colorscheme onedark
 
 """"""""""""""""""""""""NerdTree""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <C-n> :NERDTreeToggle<CR>
+
+let NERDTreeMapChangeRoot='l'
+let NERDTreeMapUpdir='h'
+let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
 
 """"""""""""""""""""""""NerdCommenter"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -229,10 +239,12 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
 """"""""""""""LaTex live preview""""""""""""""""""""""""""""""
-let g:livepreview_previewer = 'evince'
+let g:livepreview_previewed = 'evince'
 
 
 """"""""""""""Vim Airline""""""""""""""
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts=1
 
+""""""""""""""Vifm""""""""""""""
+let g:vifm_embed_split = 1

@@ -505,13 +505,14 @@ key_bindings:
   - { key: Semicolon, mods: Command,    action: IncreaseFontSize              }
   - { key: A,         mods: Command,    action: Quit                          }
   - { key: Z,         mods: Command,    action: Quit                          }
-  - { key: L,         mods: Alt|Shift,  chars: "|"                            }
+  - { key: 37,        mods: Alt|Shift,  chars: "|"                            }
   - { key: LBracket,  mods: Alt,        chars: "{"                            }
   - { key: RBracket,  mods: Alt,        chars: "}"                            }
   - { key: LBracket,  mods: Alt|Shift,  chars: "["                            }
   - { key: RBracket,  mods: Alt|Shift,  chars: "]"                            }
   - { key: N,         mods: Alt,        chars: "~"                            }
-  - { key: Backslash, mods: Alt|Shift,  chars: "\\"                           }
+  - { key: 47,        mods: Alt|Shift,  chars: "\\"                           }
+  - { key: 47,        mods: Command|Shift, chars: "++"                        }
   # (Windows, Linux, and BSD only)
   #- { key: V,        mods: Control|Shift, action: Paste            }
   #- { key: C,        mods: Control|Shift, action: Copy             }
