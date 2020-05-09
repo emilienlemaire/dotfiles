@@ -149,3 +149,9 @@ export PYTHONPATH
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+export EDITOR=nvim
+alias vim="nvim"
+alias vi="nvim"
+
+bindkey -v
