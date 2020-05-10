@@ -64,17 +64,15 @@ nnoremap <leader>= :wincmd =<cr>
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'calincru/flex-bison-syntax'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'let-def/ocp-indent-vim'
+Plug 'majutsushi/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'numirias/semshi', {'do': 'UpdateRemotePlugins'}
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
-Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
-Plug 'sbdchd/neoformat'
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
@@ -82,7 +80,7 @@ Plug 'vifm/vifm.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimlab/split-term.vim'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
