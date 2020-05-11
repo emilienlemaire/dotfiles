@@ -278,7 +278,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.5
+background_opacity: 0.75
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -510,7 +510,6 @@ key_bindings:
   - { key: RBracket,  mods: Alt,        chars: "}"                            }
   - { key: LBracket,  mods: Alt|Shift,  chars: "["                            }
   - { key: RBracket,  mods: Alt|Shift,  chars: "]"                            }
-  - { key: N,         mods: Alt,        chars: "~"                            }
   - { key: 47,        mods: Alt|Shift,  chars: "\\"                           }
   - { key: 47,        mods: Command|Shift, chars: "++"                        }
   # (Windows, Linux, and BSD only)
