@@ -116,7 +116,7 @@ export ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-PATH="$HOME/anaconda3/bin:$PATH"
+PATH="$HOME/opt/anaconda3/bin:$PATH"
 
 # opam configuration
 test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -126,20 +126,20 @@ export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/emilienlemaire/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/emilienlemaire/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/emilienlemaire/opt/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/anaconda3/bin:$PATH"
+        export PATH="/Users/emilienlemaire/opt/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-  source "${VIRTUAL_ENV}/bin/activate"
+# source "${VIRTUAL_ENV}/bin/activate"  # commented out by conda initialize
 fi
 export PATH="/usr/local/opt/bison/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"

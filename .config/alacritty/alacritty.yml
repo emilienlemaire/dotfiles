@@ -501,17 +501,18 @@ background_opacity: 0.75
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
 key_bindings:
-  - { key: Equals,    mods: Command,    action: DecreaseFontSize              }
-  - { key: Semicolon, mods: Command,    action: IncreaseFontSize              }
-  - { key: A,         mods: Command,    action: Quit                          }
-  - { key: Z,         mods: Command,    action: Quit                          }
-  - { key: 37,        mods: Alt|Shift,  chars: "|"                            }
-  - { key: LBracket,  mods: Alt,        chars: "{"                            }
-  - { key: RBracket,  mods: Alt,        chars: "}"                            }
-  - { key: LBracket,  mods: Alt|Shift,  chars: "["                            }
-  - { key: RBracket,  mods: Alt|Shift,  chars: "]"                            }
-  - { key: 47,        mods: Alt|Shift,  chars: "\\"                           }
-  - { key: 47,        mods: Command|Shift, chars: "++"                        }
+  - { key: Equals,    mods: Command,       action: DecreaseFontSize              }
+  - { key: Semicolon, mods: Command,       action: IncreaseFontSize              }
+  - { key: A,         mods: Command,       action: Quit                          }
+  - { key: Z,         mods: Command,       action: Quit                          }
+  - { key: 37,        mods: Alt|Shift,     chars: "|"                            }
+  - { key: LBracket,  mods: Alt,           chars: "{"                            }
+  - { key: RBracket,  mods: Alt,           chars: "}"                            }
+  - { key: LBracket,  mods: Alt|Shift,     chars: "["                            }
+  - { key: RBracket,  mods: Alt|Shift,     chars: "]"                            }
+  - { key: 47,        mods: Alt|Shift,     chars: "\\"                           }
+  - { key: 47,        mods: Command|Shift, chars: "++"                           }
+  - { key: 76,                             chars: "\x0d"                         }
   # (Windows, Linux, and BSD only)
   #- { key: V,        mods: Control|Shift, action: Paste            }
   #- { key: C,        mods: Control|Shift, action: Copy             }

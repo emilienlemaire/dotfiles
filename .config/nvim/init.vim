@@ -64,6 +64,7 @@ nnoremap <leader>= :wincmd =<cr>
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'calincru/flex-bison-syntax'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'emilienlemaire/nvimux'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'let-def/ocp-indent-vim'
@@ -104,6 +105,13 @@ colorscheme onedark
 """"""""""""""""""""""""NerdTree""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <C-n> :NERDTreeToggle<CR>
 
+augroup nerdtree
+    autocmd!
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup end
+
 let NERDTreeMapChangeRoot='l'
 let NERDTreeMapUpdir='h'
 let NERDTreeMinimalUI=1
@@ -114,8 +122,8 @@ vmap ++ <plug>NERDCommenterToggle<CR>
 nmap ++ <plug>NERDCommenterToggle<CR>
 
 """"""""""""""""""""""""Python""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_host_prog = "$HOME/anaconda3/envs/neovim2/bin/python"
-let g:python3_host_prog = "$HOME/anaconda3/bin/python"
+let g:python_host_prog = "$HOME/opt/anaconda3/envs/neovim2/bin/python"
+let g:python3_host_prog = "$HOME/opt/anaconda3/bin/python"
 
 """"""""""""""""""""""""Coc.nvim""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set cmdheight=2
