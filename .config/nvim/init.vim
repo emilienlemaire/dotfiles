@@ -62,9 +62,9 @@ nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'calincru/flex-bison-syntax'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'emilienlemaire/nvimux'
+"Plug 'calincru/flex-bison-syntax'
+Plug 'emilienlemaire/nvimux-navigator'
+Plug 'ilyachur/cmake4vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'let-def/ocp-indent-vim'
@@ -72,10 +72,10 @@ Plug 'majutsushi/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'numirias/semshi', {'do': 'UpdateRemotePlugins'}
 Plug 'preservim/nerdcommenter'
-Plug 'preservim/nerdtree'
+"Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sensible'
+"Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vifm/vifm.vim'
 Plug 'vim-airline/vim-airline'
@@ -84,7 +84,7 @@ Plug 'vimlab/split-term.vim'
 Plug 'dense-analysis/ale'
 Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
@@ -102,21 +102,6 @@ let g:merlin_python_version = 3
 """"""""""""""""""""""""One dark""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme onedark
 
-""""""""""""""""""""""""NerdTree""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <C-n> :NERDTreeToggle<CR>
-
-augroup nerdtree
-    autocmd!
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup end
-
-let NERDTreeMapChangeRoot='l'
-let NERDTreeMapUpdir='h'
-let NERDTreeMinimalUI=1
-let NERDTreeShowHidden=1
-
 """"""""""""""""""""""""NerdCommenter"""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap ++ <plug>NERDCommenterToggle<CR>
 nmap ++ <plug>NERDCommenterToggle<CR>
@@ -125,6 +110,8 @@ nmap ++ <plug>NERDCommenterToggle<CR>
 let g:python_host_prog = "$HOME/opt/anaconda3/envs/neovim2/bin/python"
 let g:python3_host_prog = "$HOME/opt/anaconda3/bin/python"
 
+""""""""""""""""""""""""Ruby""""""""""""""""""""""""
+let g:ruby_host_prog = "/Users/emilienlemaire/.rvm/gems/ruby-2.7.0/bin/neovim-ruby-host"
 """"""""""""""""""""""""Coc.nvim""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set cmdheight=2
 set updatetime=300
@@ -250,10 +237,15 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 """"""""""""""LaTex live preview""""""""""""""""""""""""""""""
 let g:livepreview_previewed = 'evince'
 
-
 """"""""""""""Vim Airline""""""""""""""
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts=1
 
 """"""""""""""Vifm""""""""""""""
 let g:vifm_embed_split = 1
+nnoremap <silent> <C-n> :Vifm<cr>
+
+""""""""""""""CMake""""""""""""""
+nnoremap <silent> <leader>b :CMakeBuild<cr>
+nnoremap <silent> <leader>g :CMake<cr>
+nnoremap <silent> <leader>rs :CMakeReset<cr>

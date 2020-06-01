@@ -77,8 +77,8 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
-	zsh-syntax-highlighting
 	zsh-autosuggestions
+        zsh-syntax-highlighting
         tmux
 	)
 
@@ -145,7 +145,7 @@ export PATH="/usr/local/opt/bison/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/texlive/2020/bin/x86_64-darwin:$PATH"
 
-PYTHONPATH=$PYTHONPATH:/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Resources/Python3
+PYTHONPATH=/usr/local/lib/python3.8/site-packages:/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Resources/Python3:$PYTHONPATH
 export PYTHONPATH
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -156,3 +156,18 @@ alias vim="nvim"
 alias vi="nvim"
 
 bindkey -v
+alias python2=/usr/local/bin/python2.7
+alias python=/usr/local/bin/python3.8
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+
+PATH="/Users/emilienlemaire/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/emilienlemaire/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/emilienlemaire/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/emilienlemaire/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/emilienlemaire/perl5"; export PERL_MM_OPT;
+
+
+source ~/perl5/perlbrew/etc/bashrc
+
