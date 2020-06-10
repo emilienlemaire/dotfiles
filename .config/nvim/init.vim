@@ -40,14 +40,25 @@ set relativenumber
 set number
 
 set list
+
+set undodir=~/.config/nvim/undo-dir
+set undofile
+
+set colorcolumn=100
+set nowrap
+
+set termguicolors
+
+set clipboard=unnamed
+
 if has('multi_byte') && &encoding ==# 'utf-8'
-	let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+    let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
-	let &listchar = 'tab:> ,extends:>,precedes:<,nbsp:.'
+    let &listchar = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
 
 if &shell =~# 'fish$'
-	set shell=/bin/bash
+    set shell=/bin/bash
 endif
 
 autocmd VimResized * :wincmd =
@@ -56,63 +67,80 @@ autocmd VimResized * :wincmd =
 let mapleader=","
 
 nnoremap <leader>rl :source ~/.config/nvim/init.vim<CR>
-map <leader>t :CommandT<CR>
 
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+
 call plug#begin(stdpath('data') . '/plugged')
-"Plug 'calincru/flex-bison-syntax'
+Plug 'cdelledonne/vim-cmake'
+Plug 'dense-analysis/ale'
 Plug 'emilienlemaire/nvimux-navigator'
-Plug 'ilyachur/cmake4vim'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'let-def/ocp-indent-vim'
 Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'numirias/semshi', {'do': 'UpdateRemotePlugins'}
+"Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'preservim/nerdcommenter'
-"Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
-"Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vifm/vifm.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimlab/split-term.vim'
-Plug 'dense-analysis/ale'
+Plug 'vimwiki/vimwiki'
 Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                                     "
-"                    PLUGIN SETUP                                                     "
-"                                                                                     "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                             "
+"             PLUGIN SETUP                                                    "
+"                                                                             "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""OCaml""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""CommandT"""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>t :CommandT<CR>
+if &term =~ "xterm" || &term =~ "screen"
+    let g:CommandTCancelMap = ['<ESC>', '<C-c>']
+endif
+
+set wildignore+=CMakeFiles,*/llvm/*,*/llvm-c/*,*/llvm-libs/*
+
+""""""""""""""""""""""""OCaml""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim/doc"
 let g:merlin_python_version = 3
 
-""""""""""""""""""""""""One dark""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme onedark
+""""""""""""""""""""""""Colorscheme""""""""""""""""""""""""""""""""""""""""""""
+let g:gruvbox_constrast_dark = "hard"
+augroup gbox
+    autocmd!
+    autocmd vimenter * colorscheme gruvbox
+    autocmd vimenter * :AirlineRefresh
+augroup end
 
-""""""""""""""""""""""""NerdCommenter"""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""NerdCommenter""""""""""""""""""""""""""""""""""""""""""
 vmap ++ <plug>NERDCommenterToggle<CR>
 nmap ++ <plug>NERDCommenterToggle<CR>
 
-""""""""""""""""""""""""Python""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""Python"""""""""""""""""""""""""""""""""""""""""""""""""
 let g:python_host_prog = "$HOME/opt/anaconda3/envs/neovim2/bin/python"
 let g:python3_host_prog = "$HOME/opt/anaconda3/bin/python"
 
 """"""""""""""""""""""""Ruby""""""""""""""""""""""""
 let g:ruby_host_prog = "/Users/emilienlemaire/.rvm/gems/ruby-2.7.0/bin/neovim-ruby-host"
-""""""""""""""""""""""""Coc.nvim""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""Coc.nvim"""""""""""""""""""""""""""""""""""""""""""""""
 set cmdheight=2
 set updatetime=300
 set shortmess+=c
@@ -233,19 +261,48 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" coc-clangd
+nnoremap <silent> <leader>s :CocCommand clangd.switchSourceHeader<cr>
 
-""""""""""""""LaTex live preview""""""""""""""""""""""""""""""
+let g:coc_snippet_next = '<tab>'
+
+""""""""""""""LaTex live preview"""""""""""""""""""""""""""""""""""""""""""""""
 let g:livepreview_previewed = 'evince'
 
-""""""""""""""Vim Airline""""""""""""""
-let g:airline_theme='onedark'
+""""""""""""""Vim Airline""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_theme="base16_gruvbox_dark_hard"
 let g:airline_powerline_fonts=1
 
-""""""""""""""Vifm""""""""""""""
+""""""""""""""Vifm"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vifm_embed_split = 1
 nnoremap <silent> <C-n> :Vifm<cr>
 
-""""""""""""""CMake""""""""""""""
+""""""""""""""CMake""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! s:cmake_generate()
+    if !exists(g:cmake_build_type)
+endfunction
+
 nnoremap <silent> <leader>b :CMakeBuild<cr>
-nnoremap <silent> <leader>g :CMake<cr>
-nnoremap <silent> <leader>rs :CMakeReset<cr>
+nnoremap <silent> <leader>g :CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=1<cr>
+nnoremap <silent> <leader>rs :CMakeClean<cr>
+
+""""""""""""""ALE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+            \    'cpp': ['clangd']
+            \}
+
+let g:ale_fixers = {
+            \   'cpp': ['clangd']
+            \}
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+""""""""""""""Undotree"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>u :UndotreeToggle<cr>
+
+""""""""""""VimWiki""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType vimwiki nnoremap <buffer> <C-t> :VimwikiToggleListItem<cr>
