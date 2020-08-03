@@ -51,6 +51,8 @@ set termguicolors
 
 set clipboard=unnamed
 
+set timeoutlen=100
+
 if has('multi_byte') && &encoding ==# 'utf-8'
     let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
@@ -64,9 +66,7 @@ endif
 autocmd VimResized * :wincmd =
 
 """""REMAPPING"""""
-let mapleader=","
-
-nnoremap <leader>rl :source ~/.config/nvim/init.vim<CR>
+let mapleader=" "
 
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
@@ -77,19 +77,29 @@ vnoremap K :m '<-2<cr>gv=gv
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'cdelledonne/vim-cmake'
 Plug 'dense-analysis/ale'
+Plug 'dpelle/vim-LanguageTool'
 Plug 'emilienlemaire/nvimux-navigator'
+Plug 'godlygeek/tabular'
+Plug 'honza/vim-snippets'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
+Plug 'jremmen/vim-ripgrep'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'lervag/vimtex'
 Plug 'let-def/ocp-indent-vim'
+Plug 'liuchengxu/vim-which-key'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
+Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'numirias/semshi', {'do': 'UpdateRemotePlugins'}
-"Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'plasticboy/vim-markdown'
 Plug 'preservim/nerdcommenter'
 Plug 'ryanoasis/vim-devicons'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vifm/vifm.vim'
@@ -97,8 +107,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimlab/split-term.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'voldikss/vim-floaterm'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
@@ -109,12 +118,12 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""CommandT"""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>t :CommandT<CR>
-if &term =~ "xterm" || &term =~ "screen"
-    let g:CommandTCancelMap = ['<ESC>', '<C-c>']
-endif
+"nnoremap <leader>t :CommandT<CR>
+"if &term =~ "xterm" || &term =~ "screen"
+    "let g:CommandTCancelMap = ['<ESC>', '<C-c>']
+"endif
 
-set wildignore+=CMakeFiles,*/llvm/*,*/llvm-c/*,*/llvm-libs/*
+"set wildignore+=CMakeFiles,*/llvm/*,*/llvm-c/*,*/llvm-libs/*
 
 """"""""""""""""""""""""OCaml""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
@@ -163,14 +172,10 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 "Use <cr> to confirm completion
 if exists('*complete_info')
-    inoremap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
-
-"Navigate diagnostic
-nmap <silent> <leader>i <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>k <Plug>(coc-diagnostic-next)
 
 "GoTo navigation
 nmap <silent> gd <Plug>(coc-definition)
@@ -191,9 +196,6 @@ endfunction
 
 "Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-"Renaming
-nmap <leader>rn <Plug>(coc-rename)
 
 "Formating selected code
 xmap <leader>f <Plug>(coc-format-selected)
@@ -252,17 +254,12 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " coc-clangd
-nnoremap <silent> <leader>s :CocCommand clangd.switchSourceHeader<cr>
 
 let g:coc_snippet_next = '<tab>'
 
@@ -285,7 +282,6 @@ endfunction
 
 nnoremap <silent> <leader>b :CMakeBuild<cr>
 nnoremap <silent> <leader>g :CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=1<cr>
-nnoremap <silent> <leader>rs :CMakeClean<cr>
 
 """"""""""""""ALE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_linters_explicit = 1
@@ -306,3 +302,22 @@ nnoremap <leader>u :UndotreeToggle<cr>
 
 """"""""""""VimWiki""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType vimwiki nnoremap <buffer> <C-t> :VimwikiToggleListItem<cr>
+
+""""""""""""""FZF""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-p> :FZF<cr>
+
+""""""""""""""WhichKey""""""""""""""
+source $HOME/.config/nvim/keys/which-keys.vim
+
+""""""""""""""Markdown""""""""""""""
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
+
+""""""""""""""FloatTerm"""""""""""
+let g:floaterm_keymap_new = '<F9>'
+let g:floaterm_keymap_prev = '<F10>'
+let g:floaterm_keymap_next = '<F11>'
+let g:floaterm_keymap_toggle = '<F12>'
+
+""""""""""""""LanguageTool"""""""""
+let g:languagetool_jar='~/dev/LanguageTool-4.9.1/languagetool-commandline.jar'

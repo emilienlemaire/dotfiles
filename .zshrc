@@ -155,7 +155,6 @@ export EDITOR=nvim
 alias vim="nvim"
 alias vi="nvim"
 
-bindkey -v
 alias python2=/usr/local/bin/python2.7
 alias python=/usr/local/bin/python3.8
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -171,3 +170,10 @@ PERL_MM_OPT="INSTALL_BASE=/Users/emilienlemaire/perl5"; export PERL_MM_OPT;
 
 source ~/perl5/perlbrew/etc/bashrc
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git}"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export PATH="/usr/local/opt/flex/bin:$PATH"
+export PATH="/usr/local/opt/bison/bin:$PATH"

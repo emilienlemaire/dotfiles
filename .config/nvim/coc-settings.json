@@ -1,0 +1,7 @@
+{
+    "diagnostic.displayByAle": true,
+    "suggest.noselect": false,
+    "python.pythonPath": "/usr/local/bin/python3.8",
+    "clangd.semanticHighlighting": true,
+    "clangd.arguments": ["-cross-file-rename"]
+}
