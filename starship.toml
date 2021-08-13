@@ -1,0 +1,19 @@
+[[battery.display]]
+threshold = 100
+style = "bold green"
+
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[✖](bold red)"
+
+[username]
+style_user = 'bold dimmed blue'
+show_always = false
