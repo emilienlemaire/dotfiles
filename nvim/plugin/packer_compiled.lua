@@ -73,9 +73,29 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/BetterLua.vim"
   },
-  ["calvera-dark.nvim"] = {
+  ["cmp-buffer"] = {
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/calvera-dark.nvim"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+  },
+  ["cmp-latex-symbols"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-latex-symbols"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-path"
+  },
+  ["cmp-vsnip"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-vsnip"
   },
   ["colorbuddy.vim"] = {
     loaded = true,
@@ -93,10 +113,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
-  ["gmpl.vim"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/gmpl.vim"
-  },
   gruvbox = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/gruvbox"
@@ -105,13 +121,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/indent-guides.nvim"
   },
+  ["iron.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/iron.nvim"
+  },
+  ["jupytext.vim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/jupytext.vim"
+  },
   kommentary = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/kommentary"
   },
-  ["lexima.vim"] = {
+  ["llvm-vim"] = {
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/lexima.vim"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/llvm-vim"
   },
   ["lsp-status.nvim"] = {
     loaded = true,
@@ -129,10 +153,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/neoformat"
   },
-  neofs = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/neofs"
-  },
   neogit = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/neogit"
@@ -141,25 +161,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nlua.nvim"
   },
-  ["nvim-compe"] = {
+  ["nvim-cmp"] = {
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-compe"
-  },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-dap"
-  },
-  ["nvim-dap-virtual-text"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-cmp"
   },
   ["nvim-hlslens"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-hlslens"
-  },
-  ["nvim-lsp-ts-utils"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-lsp-ts-utils"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -182,6 +190,10 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/opt/one-nvim"
   },
+  ["onedark.vim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/onedark.vim"
+  },
   ["packer.nvim"] = {
     loaded = false,
     needs_bufread = false,
@@ -199,6 +211,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  ["pseudo-syntax"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/pseudo-syntax"
+  },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/rust-tools.nvim"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
@@ -211,13 +231,19 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
+  ["todo-comments.nvim"] = {
+    config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18todo-comments\frequire\0" },
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/todo-comments.nvim"
+  },
   ["treesitter-context.nvim"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/treesitter-context.nvim"
   },
-  ["typescript-vim"] = {
+  ["trouble.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0" },
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/typescript-vim"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/trouble.nvim"
   },
   undotree = {
     loaded = true,
@@ -231,61 +257,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-devicons"
   },
-  ["vim-easy-align"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-easy-align"
-  },
-  ["vim-floaterm"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-floaterm"
-  },
-  ["vim-glsl"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-glsl"
-  },
-  ["vim-header"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-header"
-  },
-  ["vim-js"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-js"
-  },
-  ["vim-js-file-import"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-js-file-import"
-  },
-  ["vim-jsx-improve"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-jsx-improve"
-  },
-  ["vim-jsx-typescript"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-jsx-typescript"
-  },
   ["vim-markdown"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-markdown"
+  },
+  ["vim-menhir"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-menhir"
   },
   ["vim-mkdir"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-mkdir"
   },
-  ["vim-nix"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-nix"
-  },
   ["vim-ocaml"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-ocaml"
-  },
-  ["vim-react-snippets"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-react-snippets"
-  },
-  ["vim-ripple"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-ripple"
   },
   ["vim-sandwich"] = {
     loaded = true,
@@ -295,17 +281,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-startify"
   },
-  ["vim-styled-components"] = {
+  ["vim-textobj-hydrogen"] = {
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-styled-components"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-textobj-hydrogen"
   },
-  ["vim-unicoder"] = {
+  ["vim-textobj-user"] = {
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-unicoder"
-  },
-  ["vim-visual-multi"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-visual-multi"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-textobj-user"
   },
   ["vim-vsnip"] = {
     loaded = true,
@@ -319,13 +301,38 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vimtex"
   },
+  vimwiki = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vimwiki"
+  },
   ["vs-snippets"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vs-snippets"
+  },
+  ["yaml.nvim"] = {
+    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\tinit\14yaml_nvim\frequire\0" },
+    loaded = false,
+    needs_bufread = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/opt/yaml.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: todo-comments.nvim
+time([[Config for todo-comments.nvim]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
+time([[Config for todo-comments.nvim]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType yaml ++once lua require("packer.load")({'yaml.nvim'}, { ft = "yaml" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

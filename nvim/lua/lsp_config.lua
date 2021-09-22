@@ -3,7 +3,7 @@ local nvim_status = require('lsp-status')
 local status = require('elem.lsp_status')
 -- local clang_tidy = require('clang-tidy')
 
-vim.lsp.set_log_level("trace")
+vim.lsp.set_log_level("debug")
 
 -- require('vim.lsp.log').set_level("debug")
 
@@ -13,9 +13,9 @@ local custom_attach = function(client)
   status.on_attach(client)
 end
 
-local capabilities = nvim_status.capabilities;
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 local clangd_capabilities = capabilities;
 clangd_capabilities.textDocument.semanticHighlighting = true;
 
@@ -27,13 +27,18 @@ lsp.clangd.setup({
   "--header-insertion=iwyu",
   "--cross-file-rename"},
   on_attach = custom_attach,
-  init_options = {
-    clangdFileStatus = true,
-    clangdSemanticHighlighting = true
-  },
   handlers = nvim_status.extensions.clangd.setup(),
   capabilities = clangd_capabilities,
 })
+
+--[[ lsp.ccls.setup {
+  init_options = {
+    compilationDatabaseDirectory = "Debug",
+    cache = {
+      directory = '.ccls-cache'
+    }
+  }
+} ]]
 
 lsp.vimls.setup({
   on_attach = custom_attach,
@@ -111,26 +116,26 @@ lsp.pylsp.setup({
 })
 
 local format_async = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then return end
-    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-        local view = vim.fn.winsaveview()
-        vim.lsp.util.apply_text_edits(result, bufnr)
-        vim.fn.winrestview(view)
-        if bufnr == vim.api.nvim_get_current_buf() then
-            vim.api.nvim_command("noautocmd :update")
-        end
+  if err ~= nil or result == nil then return end
+  if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+    local view = vim.fn.winsaveview()
+    vim.lsp.util.apply_text_edits(result, bufnr)
+    vim.fn.winrestview(view)
+    if bufnr == vim.api.nvim_get_current_buf() then
+      vim.api.nvim_command("noautocmd :update")
     end
+  end
 end
 
 vim.lsp.handlers["textDocument/formatting"] = format_async
 
 _G.lsp_organize_imports = function()
-    local params = {
-        command = "_typescript.organizeImports",
-        arguments = {vim.api.nvim_buf_get_name(0)},
-        title = ""
-    }
-    vim.lsp.buf.execute_command(params)
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = {vim.api.nvim_buf_get_name(0)},
+    title = ""
+  }
+  vim.lsp.buf.execute_command(params)
 end
 
 local on_attach_js = function(client, bufnr)

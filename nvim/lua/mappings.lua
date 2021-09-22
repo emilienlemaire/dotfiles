@@ -24,24 +24,6 @@ utils.map('n', '<leader>g',
 options)
 --}}}
 
---{{{ compe
-vim.cmd [[call lexima#set_default_rules()]]
-utils.map('i', '<C-Space>', 'compe#complete()', {
-  noremap = true,
-  silent = true,
-  expr = true
-})
-utils.map('i', '<CR>', [[compe#confirm(lexima#expand('<LT>CR>', 'i'))]], {
-  noremap = true,
-  silent = true,
-  expr = true
-})
-utils.map('i', '<Tab>', [[v:lua.utils.tab_complete()]],{ expr = true })
-utils.map('s', '<Tab>', [[v:lua.utils.tab_complete()]],{ expr = true })
-utils.map('i', '<S-Tab>', [[v:lua.utils.s_tab_complete()]],{ expr = true })
-utils.map('s', '<S-Tab>', [[v:lua.utils.s_tab_complete()]],{ expr = true })
--- }}}
-
 -- {{{ vsnip
 utils.map('i', '<C-j>', [[vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>']], {expr = true})
 utils.map('s', '<C-j>', [[vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>']], {expr = true})
@@ -77,7 +59,7 @@ utils.map('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
 -- }}}
 
 -- {{{ ripple
-utils.map('n', '<leader>sr', '<Plug>(ripple_send_motion)ip')
+-- utils.map('n', '<leader>sr', '<Plug>(ripple_send_motion)ip')
 -- }}}
 --
 -- {{{ telescope
@@ -91,7 +73,7 @@ utils.map_lua('n', '<leader>dg', [[require'telescope.builtin'.lsp_document_diagn
 utils.map_lua('n', '<leader>wg', [[require'telescope.builtin'.lsp_workspace_diagnostics{}]], options)
 utils.map_lua('n', '<leader>ld', [[require'telescope.builtin'.lsp_definition{}]], options)
 utils.map_lua('n', '<leader>ec', [[require'elem.telescope'.edit_config{}]], options)
-utils.map_lua('n', '<leader>ff', [[require'elem.telescope'.curbufc{}]], options)
+utils.map_lua('n', '<leader>ff', [[require'elem.telescope'.curbuf{}]], options)
 -- }}}
 --
 -- {{{ dap
@@ -122,4 +104,8 @@ utils.map('v', '<leader>ca', [[<cmd>'<,'>lua require('lspsaga.codeaction').range
 
 -- {{{ neofs
 utils.map_lua('n', '<leader>f', [[require'neofs'.open()]], options)
+-- }}}
+
+-- {{{ iron.nvim
+utils.map('n', ']x', "ctrih/^# %%<CR><CR>")
 -- }}}

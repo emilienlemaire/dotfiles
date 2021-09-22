@@ -133,4 +133,17 @@ vim.g.neoformat_ocaml_ocamlformat = {
 
 vim.g.neoformat_enabled_ocaml = {'ocamlformat'}
 -- }}}
-
+-- {{{ jupytext
+vim.g.jupytext_fmt = 'py'
+vim.g.jupytext_style = 'hydrogen'
+-- }}}
+-- {{{ vinwiki
+vim.g.vimwiki_list = {
+  {
+    automatic_nested_syntax = true,
+    template_path = "~/vimwiki_tpl",
+    template_ext = ".tpl",
+    template_default = "syntax-highlighted"
+  }
+}
+-- }}}

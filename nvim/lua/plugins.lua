@@ -2,28 +2,39 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup({
   function(use)
+    use {
+      "cuducos/yaml.nvim",
+      ft = {"yaml"}, -- optional
+      requires = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-telescope/telescope.nvim" -- optional
+      },
+      config = function ()
+        require("yaml_nvim").init()
+      end,
+    }
+    use '~/nvim-plugins/llvm-vim'
 
     use {'wbthomason/packer.nvim', opt = true}
     --{{{ LSP
     use 'neovim/nvim-lspconfig'
 
-    -- use 'nvim-lua/completion-nvim'
-    -- use 'steelsojka/completion-buffers'
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/playground'
-    -- use 'nvim-treesitter/completion-treesitter'
     use 'nvim-treesitter/nvim-treesitter-refactor'
-    -- use 'kristijanhusak/completion-tags'
-    use 'hrsh7th/nvim-compe'
+
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-vsnip'
+    use 'kdheepak/cmp-latex-symbols'
 
     use 'wbthomason/lsp-status.nvim'
-
-    --[[ use 'dense-analysis/ale'
-    use 'nathunsmitty/nvim-ale-diagnostic' ]]
+    use 'simrat39/rust-tools.nvim'
 
     use 'sbdchd/neoformat'
-
-    --use 'emilienlemaire/clang-tidy.nvim'
 
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
@@ -31,8 +42,6 @@ return require('packer').startup({
 
     use 'glepnir/lspsaga.nvim'
 
-    -- TODO: Maybe contribute for MacOS
-    --use 'anott03/nvim-lspinstall'
     --}}}
 
     --{{{ UTILS
@@ -41,10 +50,6 @@ return require('packer').startup({
       requires = { 'nvim-treesitter/nvim-treesitter' }
     }
 
-    -- use 'windwp/nvim-autopairs'
-    use 'cohama/lexima.vim'
-
-    use 'nvim-lua/popup.nvim'
     use {
       'nvim-telescope/telescope.nvim',
       requires = {
@@ -56,17 +61,34 @@ return require('packer').startup({
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-telescope/telescope-fzf-native.nvim', run='make'}
 
-    use 'arthurxavierx/vim-unicoder'
     use 'machakann/vim-sandwich'
-    use {'mg979/vim-visual-multi', branch = 'master'}
-    use 'pbrisbin/vim-mkdir'
-    use 'junegunn/vim-easy-align'
 
-    use 'alpertuna/vim-header'
+    use 'pbrisbin/vim-mkdir'
 
     use 'mbbill/undotree'
-    use 'voldikss/vim-floaterm'
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("todo-comments").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
 
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
     -- use 'emilienlemaire/nvimux-navigator'
 
     use 'mhinz/vim-startify'
@@ -76,11 +98,16 @@ return require('packer').startup({
     use 'TimUntersberger/neogit'
     use 'onsails/lspkind-nvim'
 
-    -- TODO: Look into how it can be fixed
-    use 'TimUntersberger/neofs'
+    use 'GCBallesteros/jupytext.vim'
+    use 'hkupty/iron.nvim'
+    use {
+      'GCBallesteros/vim-textobj-hydrogen',
+      requires = {
+        'kana/vim-textobj-user'
+      }
+    }
 
-    -- use {'oberblastmeister/neuron.nvim', branch = 'unstable'}
-    -- use 'vimwiki/vimwiki'
+    use 'vimwiki/vimwiki'
 
     use 'b3nj5m1n/kommentary'
 
@@ -88,32 +115,32 @@ return require('packer').startup({
     --}}}
 
     -- {{{ LANGUAGES
-    use 'urbainvaes/vim-ripple'
+
     use 'ocaml/vim-ocaml'
+    use 'ELLIOTTCABLE/vim-menhir'
     use 'cdelledonne/vim-cmake'
     use 'tpope/vim-markdown'
-
-    use 'mfussenegger/nvim-dap'
-    use 'theHamsta/nvim-dap-virtual-text'
 
     use 'tjdevries/nlua.nvim'
     use 'euclidianAce/BetterLua.vim'
 
-    use 'tikhomirov/vim-glsl'
+    -- use 'tikhomirov/vim-glsl'
 
-    use 'maelvls/gmpl.vim'
+    -- use 'maelvls/gmpl.vim'
 
-    use 'LnL7/vim-nix'
+    if false then
+      use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
-    use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+      use 'leafgarland/typescript-vim'
+      use 'yuezk/vim-js'
+      use {'kristijanhusak/vim-js-file-import', run = 'npm install'}
+      use 'peitalin/vim-jsx-typescript'
+      use 'mlaursen/vim-react-snippets'
+      use {'styled-components/vim-styled-components',  branch = 'main' }
+      use 'neoclide/vim-jsx-improve'
+    end
 
-    use 'leafgarland/typescript-vim'
-    use 'yuezk/vim-js'
-    use {'kristijanhusak/vim-js-file-import', run = 'npm install'}
-    use 'peitalin/vim-jsx-typescript'
-    use 'mlaursen/vim-react-snippets'
-    use {'styled-components/vim-styled-components',  branch = 'main' }
-    use 'neoclide/vim-jsx-improve'
+    use 'joelbeedle/pseudo-syntax'
 
     -- }}}
 
@@ -121,13 +148,6 @@ return require('packer').startup({
     use 'morhetz/gruvbox'
 
     use 'tjdevries/colorbuddy.vim'
-    --[[ use {
-      'Th3Whit3Wolf/spacebuddy',
-      requires = {
-        'tjdevries/colorbuddy.vim'
-      }
-    } ]]
-
     use 'tjdevries/express_line.nvim'
 
     use 'ryanoasis/vim-devicons'
@@ -135,16 +155,12 @@ return require('packer').startup({
     use 'kyazdani42/nvim-web-devicons'
 
     use {'Th3Whit3Wolf/one-nvim', opt = true}
+    use 'joshdick/onedark.vim'
 
     use 'glepnir/indent-guides.nvim'
 
     use 'lilydjwg/colorizer'
 
-    use 'yashguptaz/calvera-dark.nvim'
-    -- }}}
-
-    -- {{{ maybe later
-    --use 'npxbr/glow.nvim'
     -- }}}
   end,
   config =  {

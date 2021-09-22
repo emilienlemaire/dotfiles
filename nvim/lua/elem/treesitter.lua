@@ -2,6 +2,14 @@ local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 
 parser_config.ocaml_interface.used_by = "ocaml_interface"
 
+parser_config.yapl = {
+  install_info = {
+    url = "https://github.com/emilienlemaire/tree-sitter-yapl.git",
+    files = {"src/parser.c"}
+  },
+  filetype = "yapl",
+}
+
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true, -- false will disable the whole extension

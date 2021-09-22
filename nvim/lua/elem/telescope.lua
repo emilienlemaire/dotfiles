@@ -20,6 +20,7 @@ require('telescope').setup{
   defaults = {
     file_ignore_patterns = {"undodir/.*", "yarn%.lock", "node_modules/.*"},
 
+    layout_strategy = "flex",
     layout_config = {prompt_position = "top"},
 
     file_sorter = require("telescope.sorters").get_fzy_sorter,

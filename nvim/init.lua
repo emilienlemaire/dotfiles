@@ -1,8 +1,3 @@
---[[--
-File              : init.lua
-Date              : 11.08.2021
-Last Modified Date: 11.08.2021
---]]--
 local g = vim.g
 local o = vim.o
 local cmd = vim.cmd
@@ -19,7 +14,7 @@ b.softtabstop = 4
 b.shiftwidth = 4
 b.tabstop = 4
 b.smartindent = true
-b.modeline = false
+b.modeline = true
 b.swapfile = false
 
 o.backspace = [[indent,eol,start]]
@@ -73,13 +68,16 @@ vim.api.nvim_set_keymap('v', 'K', [[:m '<-2<cr>gv=gv]], {noremap = true})
 
 vim.api.nvim_set_keymap('n', '<A-Tab>', ':tabnext<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<A-S-Tab>', ':tabprev<cr>', {noremap = true})
+vim.api.nvim_set_keymap('t', '<A-Tab>', ':<c-\\><c-n>tabnext<cr>', {noremap = true})
+vim.api.nvim_set_keymap('t', '<A-S-Tab>', '<c-\\><c-n>:tabprev<cr>', {noremap = true})
 
 vim.api.nvim_set_keymap('n', '<Up>', [[:echoerr "Do not do that!!"<cr>]], {noremap = true})
 vim.api.nvim_set_keymap('n', '<Down>', [[:echoerr "Do not do that!!"<cr>]], {noremap = true})
 vim.api.nvim_set_keymap('n', '<Left>', [[:echoerr "Do not do that!!"<cr>]], {noremap = true})
 vim.api.nvim_set_keymap('n', '<Right>', [[:echoerr "Do not do that!!"<cr>]], {noremap = true})
 
-utils.create_augroup({
+utils.create_augroup(
+{
   {'FileType', '*', 'setlocal', 'shiftwidth=4'},
   {
     'FileType',
@@ -87,16 +85,17 @@ utils.create_augroup({
     'setlocal',
     'shiftwidth=2'
   },
-  {'FileType', 'dap-rel', [[lua require('dap.ext.autocompl').attach()]]},
   {
     'FileType',
     'ocaml,ocaml.ocaml_interface,menhir,ocamllex',
     'source',
-    [[~/.opam/default/share/ocp-indent/vim/indent/ocaml.vim]]},
-}, 'Tab2')
+    [[~/.opam/default/share/ocp-indent/vim/indent/ocaml.vim]],
+  },
+},
+'FTAucmd')
 
 utils.create_augroup({
-  {'BufRead,BufNewFile', '*.md', 'set', 'filetype=markdown'},
+  {'BufRead,BufNewFile', '*.md', 'set', 'filetype=mkd'},
   {'BufRead,BufNewFile', '*.yapl', 'set', 'filetype=yapl'},
   {'BufRead,BufNewFile', '*.mli', 'set', 'filetype=ocaml.ocaml_interface'},
   {'BufRead,BufNewFile', '*.mly', 'set', 'filetype=menhir'},
@@ -108,6 +107,7 @@ _G.setHighlights = function()
   cmd [[highlight LspDiagnosticsUnderlineHint cterm=undercurl gui=undercurl]]
   cmd [[highlight LspDiagnosticsUnderlineInformation cterm=undercurl gui=undercurl]]
   cmd [[highlight LspDiagnosticsUnderlineWarning cterm=undercurl gui=undercurl]]
+  cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
 end
 
 utils.create_augroup({
@@ -151,6 +151,7 @@ R('nvim-web-devicons').setup()
 R('gitsigns').setup()
 R('lspkind').init()
 R('indent_guides').setup()
+-- R('jupyter-nvim').setup()
 RELOADER = function()
   R('elem.lspsaga')
   R('elem.nvim-compe')
@@ -158,10 +159,10 @@ RELOADER = function()
   R('elem.statusline')
   R('elem.plenary')
   R('elem.telescope')
-  --R('elem.neofs')
+  R('elem.iron')
+  R('elem.rust-tools')
   R('mappings')
   R('globals')
-  R('elem.dap')
 end
 
 RELOADER()
@@ -171,9 +172,13 @@ utils.map_lua('n', '<leader>rc', 'RELOADER()', {noremap = true})
 g.background = "dark"
 cmd [[packadd one-nvim]]
 cmd [[colorscheme one-nvim]]
--- cmd [[highlight link TSError Normal]]
 
-cmd [[
-command! -complete=file -nargs=* DebugC lua require "elem.dap".start_c_debugger({<f-args>}, "lldb")
-]]
+-- cmd [[packadd onedark.vim]]
+--[[ utils.create_augroup({
+  {'BufEnter,BufNewFile', '*.md,*.wiki', 'colorscheme', 'onedark'},
+  {'BufEnter,BufNewFile', '*.md,*.wiki', "call", "v:lua.setHighlights()"},
+  {'BufLeave', '*.md,*.wiki', 'colorscheme', 'one-nvim'},
+}, 'MDColors') ]]
+
+-- cmd [[highlight link TSError Normal]]
 
