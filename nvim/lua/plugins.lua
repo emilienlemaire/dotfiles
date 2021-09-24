@@ -92,7 +92,10 @@ return require('packer').startup({
     -- use 'emilienlemaire/nvimux-navigator'
 
     use 'mhinz/vim-startify'
-    use 'lervag/vimtex'
+    use {
+      'lervag/vimtex',
+      ft = {'tex'}
+    }
 
     use 'lewis6991/gitsigns.nvim'
     use 'TimUntersberger/neogit'
