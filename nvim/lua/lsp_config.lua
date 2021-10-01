@@ -3,7 +3,7 @@ local nvim_status = require('lsp-status')
 local status = require('elem.lsp_status')
 -- local clang_tidy = require('clang-tidy')
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 -- require('vim.lsp.log').set_level("debug")
 

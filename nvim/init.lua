@@ -99,20 +99,9 @@ utils.create_augroup({
   {'BufRead,BufNewFile', '*.yapl', 'set', 'filetype=yapl'},
   {'BufRead,BufNewFile', '*.mli', 'set', 'filetype=ocaml.ocaml_interface'},
   {'BufRead,BufNewFile', '*.mly', 'set', 'filetype=menhir'},
-  {'BufRead,BufNewFile', '*.mll', 'set', 'filetype=ocamllex'}
+  {'BufRead,BufNewFile', '*.mll', 'set', 'filetype=ocamllex'},
+  {'BufRead,BufNewFile', '*.lus', 'set', 'filetype=lus'}
 }, 'BufE')
-
-_G.setHighlights = function()
-  cmd [[highlight LspDiagnosticsUnderlineError cterm=undercurl gui=undercurl]]
-  cmd [[highlight LspDiagnosticsUnderlineHint cterm=undercurl gui=undercurl]]
-  cmd [[highlight LspDiagnosticsUnderlineInformation cterm=undercurl gui=undercurl]]
-  cmd [[highlight LspDiagnosticsUnderlineWarning cterm=undercurl gui=undercurl]]
-  cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
-end
-
-utils.create_augroup({
-  {"ColorScheme", "*", "call", "v:lua.setHighlights()"}
-}, "UndercurlDiags")
 
 local home = os.getenv('HOME')
 
@@ -151,10 +140,9 @@ R('nvim-web-devicons').setup()
 R('gitsigns').setup()
 R('lspkind').init()
 R('indent_guides').setup()
--- R('jupyter-nvim').setup()
 RELOADER = function()
   R('elem.lspsaga')
-  R('elem.nvim-compe')
+  R('elem.nvim-cmp')
   R('elem.treesitter')
   R('elem.statusline')
   R('elem.plenary')
@@ -163,22 +151,14 @@ RELOADER = function()
   R('elem.rust-tools')
   R('mappings')
   R('globals')
+  R('elem.catppuccino')
 end
 
 RELOADER()
 
 utils.map_lua('n', '<leader>rc', 'RELOADER()', {noremap = true})
+cmd [[colorscheme catppuccino]]
 
-g.background = "dark"
-cmd [[packadd one-nvim]]
-cmd [[colorscheme one-nvim]]
-
--- cmd [[packadd onedark.vim]]
---[[ utils.create_augroup({
-  {'BufEnter,BufNewFile', '*.md,*.wiki', 'colorscheme', 'onedark'},
-  {'BufEnter,BufNewFile', '*.md,*.wiki', "call", "v:lua.setHighlights()"},
-  {'BufLeave', '*.md,*.wiki', 'colorscheme', 'one-nvim'},
-}, 'MDColors') ]]
-
--- cmd [[highlight link TSError Normal]]
+cmd  [[hi DiagnosticUnderlineError gui=undercurl guisp=Red]]
+cmd  [[hi DiagnosticUnderlineWarn gui=undercurl guisp=Orange]]
 

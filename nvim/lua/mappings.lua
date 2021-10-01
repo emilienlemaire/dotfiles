@@ -55,6 +55,11 @@ utils.map_lua('n', 'gT', [[vim.lsp.buf.type_definition()]], options)
 utils.map_lua('n', 'grf', [[vim.lsp.buf.references()]], options)
 utils.map_lua('n', 'g0', [[vim.lsp.buf.document_symbol()]], options)
 utils.map_lua('n', 'gW', [[vim.lsp.buf.workspace_symbol()]], options)
+utils.map_lua('n', 'K', [[vim.lsp.buf.hover()]], options)
+utils.map_lua('n', '<leader>cd', [[vim.lsp.diagnostic.show_line_diagnostics()]], options)
+utils.map_lua('n', '<leader>ca', [[vim.lsp.buf.code_action()]], options)
+utils.map('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
+
 utils.map('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
 -- }}}
 
@@ -91,21 +96,15 @@ utils.map_lua('n', '<leader>rn', [[require('lspsaga.rename').rename()]], options
 utils.map_lua('n', 'gh', [[require'lspsaga.provider'.lsp_finder()]], options)
 utils.map_lua('n', '<C-f>', [[require'lspsaga.action'.smart_scroll_with_saga(1)]], options)
 utils.map_lua('n', '<C-b>', [[require'lspsaga.action'.smart_scroll_with_saga(-1)]], options)
-utils.map_lua('n', 'gs', [[require'lspsaga.signaturehelp'.signature_help()]], options)
-utils.map_lua('n', '<leader>rn', [[require'lspsaga.rename'.rename()]], options)
 utils.map_lua('n', 'gd', [[require'lspsaga.provider'.preview_definition()]], options)
-utils.map_lua('n', '<leader>cd', [[require'lspsaga.diagnostic'.show_line_diagnositcs()]], options)
-utils.map_lua('n', '[e', [[require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()]], options)
-utils.map_lua('n', ']e', [[require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()]], options)
-utils.map_lua('n', '<leader>ca', [[require('lspsaga.codeaction').code_action()]], options)
-utils.map_lua('n', 'K', [[require('lspsaga.hover').render_hover_doc()]], options)
-utils.map('v', '<leader>ca', [[<cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>]], options)
--- }}}
-
--- {{{ neofs
-utils.map_lua('n', '<leader>f', [[require'neofs'.open()]], options)
 -- }}}
 
 -- {{{ iron.nvim
 utils.map('n', ']x', "ctrih/^# %%<CR><CR>")
+-- }}}
+--
+-- {{{ lsptrouble
+utils.map('n', '<leader>tt', '<cmd>TroubleToggle<cr>', options)
+utils.map('n', '<leader>tw', '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>', options)
+utils.map('n', '<leader>td', '<cmd>TroubleToggle lsp_document_diagnostics<cr>', options)
 -- }}}

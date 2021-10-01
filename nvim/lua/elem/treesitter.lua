@@ -72,6 +72,9 @@ require('nvim-treesitter.configs').setup {
        ['am'] = '@call.outer',
        ['im'] = '@call.inner',
      },
+     indent = {
+       enable = false,
+     },
    },
   ensure_installed = {
   'bash',

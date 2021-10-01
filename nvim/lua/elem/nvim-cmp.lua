@@ -40,11 +40,11 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = 'vsnip' },
+    { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "path" },
     { name = "nvim_lua" },
-    { name = "nvim_lsp" },
-    { name = 'vsnip' },
     { name = "latex_symbols" },
   },
   mapping = {

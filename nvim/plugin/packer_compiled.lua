@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/BetterLua.vim"
   },
+  ["Catppuccino.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/Catppuccino.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-buffer"
@@ -149,10 +153,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
-  neoformat = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/neoformat"
-  },
   neogit = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/neogit"
@@ -176,10 +176,6 @@ _G.packer_plugins = {
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
-  },
-  ["nvim-treesitter-refactor"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -331,8 +327,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType yaml ++once lua require("packer.load")({'yaml.nvim'}, { ft = "yaml" }, _G.packer_plugins)]]
 vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType yaml ++once lua require("packer.load")({'yaml.nvim'}, { ft = "yaml" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

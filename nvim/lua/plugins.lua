@@ -21,7 +21,6 @@ return require('packer').startup({
 
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/playground'
-    use 'nvim-treesitter/nvim-treesitter-refactor'
 
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'
@@ -33,8 +32,6 @@ return require('packer').startup({
 
     use 'wbthomason/lsp-status.nvim'
     use 'simrat39/rust-tools.nvim'
-
-    use 'sbdchd/neoformat'
 
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
@@ -148,6 +145,8 @@ return require('packer').startup({
     -- }}}
 
     -- {{{ COLORSCHEMES
+    use 'Pocco81/Catppuccino.nvim'
+
     use 'morhetz/gruvbox'
 
     use 'tjdevries/colorbuddy.vim'
