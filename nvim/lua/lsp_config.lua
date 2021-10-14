@@ -1,11 +1,6 @@
 local lsp = require('lspconfig')
 local nvim_status = require('lsp-status')
 local status = require('elem.lsp_status')
--- local clang_tidy = require('clang-tidy')
-
--- vim.lsp.set_log_level("debug")
-
--- require('vim.lsp.log').set_level("debug")
 
 status.activate()
 
@@ -16,29 +11,20 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-local clangd_capabilities = capabilities;
-clangd_capabilities.textDocument.semanticHighlighting = true;
 
 lsp.clangd.setup({
-  cmd = {"clangd",
-  "--background-index",
-  "--suggest-missing-includes",
-  "--clang-tidy",
-  "--header-insertion=iwyu",
-  "--cross-file-rename"},
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--suggest-missing-includes",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--cross-file-rename"
+  },
   on_attach = custom_attach,
   handlers = nvim_status.extensions.clangd.setup(),
   capabilities = clangd_capabilities,
 })
-
---[[ lsp.ccls.setup {
-  init_options = {
-    compilationDatabaseDirectory = "Debug",
-    cache = {
-      directory = '.ccls-cache'
-    }
-  }
-} ]]
 
 lsp.vimls.setup({
   on_attach = custom_attach,
@@ -103,12 +89,10 @@ require('nlua.lsp.nvim').setup(require('lspconfig'), {
   }
 })
 
-local htmlCapabilities = vim.lsp.protocol.make_client_capabilities()
-htmlCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lsp.html.setup {
   on_attach = custom_attach,
-  capabilities = htmlCapabilities
+  capabilities = capabilities,
 }
 
 lsp.pylsp.setup({
@@ -219,18 +203,6 @@ lsp.diagnosticls.setup {
     formatters = formatters,
     formatFiletypes = formatFiletypes
   }
-}
-
-lsp.rnix.setup({
-  on_attach = custom_attach
-})
-
-local css_capabilities = vim.lsp.protocol.make_client_capabilities()
-css_capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-lsp.cssls.setup {
-  on_attach = custom_attach,
-  capabilities = css_capabilities,
 }
 
 local configs = require('lspconfig/configs')

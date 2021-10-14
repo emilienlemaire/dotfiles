@@ -1,9 +1,16 @@
-local iron = require('iron')
-
-iron.core.set_config {
-  preferred = {
-    python = 'ipython',
-    ocaml = 'utop'
+vim.g.ripple_repls = {
+  rml = {
+    command = "rmltop",
+    post = ";;",
+    addcr  = 1
   },
-  repl_open_cmd = [[vsplit]]
+  python = {
+    command = 'ipython',
+  },
+  ocaml = {
+    command = "utop",
+    pre = "",
+    post = ";;",
+    addcr = 1
+  }
 }

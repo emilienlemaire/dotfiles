@@ -1,9 +1,7 @@
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-    return false
-  end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
@@ -16,9 +14,16 @@ cmp.setup {
   formatting = {
     format = function(entry, vim_item)
       -- fancy icons and a name of kind
+
       vim_item.kind = require("lspkind").presets.default[vim_item.kind] ..
       " " .. vim_item.kind
       -- set a name for each source
+      --[[ if entry.source.name == 'cmp_tabnine' then
+        if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+          menu = entry.completion_item.data.detail .. ' ' .. menu
+        end
+        vim_item.kind = ''
+      end ]]
       vim_item.menu = ({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
@@ -40,12 +45,13 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'vsnip' },
+    { name = "vsnip" },
     { name = "nvim_lsp" },
-    { name = "buffer" },
+    { name = "cmp_tabnine" },
     { name = "path" },
     { name = "nvim_lua" },
-    { name = "latex_symbols" },
+    -- { name = "latex_symbols" },
+    { name = "buffer" },
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -57,8 +63,8 @@ cmp.setup {
       select = false
     }),
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        feedkey("<C-n>", "n")
+      if cmp.visible() then
+        cmp.select_next_item()
       elseif vim.fn["vsnip#available"]() == 1 then
         feedkey("<Plug>(vsnip-expand-or-jump)", "")
       elseif has_words_before() then
@@ -67,12 +73,13 @@ cmp.setup {
         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
     end, { "i", "s" }),
+
     ["<S-Tab>"] = cmp.mapping(function()
-      if vim.fn.pumvisible() == 1 then
-        feedkey("<C-p>", "n")
+      if cmp.visible() then
+        cmp.select_prev_item()
       elseif vim.fn["vsnip#jumpable"](-1) == 1 then
         feedkey("<Plug>(vsnip-jump-prev)", "")
       end
     end, { "i", "s" }),
-  }
+  },
 }

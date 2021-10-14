@@ -29,15 +29,15 @@ return require('packer').startup({
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-vsnip'
     use 'kdheepak/cmp-latex-symbols'
+    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
     use 'wbthomason/lsp-status.nvim'
     use 'simrat39/rust-tools.nvim'
+    use 'mfussenegger/nvim-dap'
 
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
     use 'kitagry/vs-snippets'
-
-    use 'glepnir/lspsaga.nvim'
 
     --}}}
 
@@ -99,7 +99,7 @@ return require('packer').startup({
     use 'onsails/lspkind-nvim'
 
     use 'GCBallesteros/jupytext.vim'
-    use 'hkupty/iron.nvim'
+    use 'urbainvaes/vim-ripple'
     use {
       'GCBallesteros/vim-textobj-hydrogen',
       requires = {

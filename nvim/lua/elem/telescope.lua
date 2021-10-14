@@ -15,6 +15,7 @@ end
 reloader()
 
 local themes = require('telescope.themes')
+local trouble = require("trouble.providers.telescope")
 
 require('telescope').setup{
   defaults = {
@@ -39,13 +40,23 @@ require('telescope').setup{
         override_file_sorter = true,     -- override the file sorter
         case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
       }
-    }
-  }
+    },
+
+    mappings = {
+      i = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
+    },
+  },
 }
 
 pcall(require('telescope').load_extension, 'fzf_native')
 
 local M = {}
+
+function M.git_files()
+  local opts = themes.get_ivy()
+  require('telescope.builtin').git_files(opts)
+end
 
 function M.edit_config()
   require('telescope.builtin').git_files {

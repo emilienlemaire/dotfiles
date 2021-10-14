@@ -100,7 +100,9 @@ utils.create_augroup({
   {'BufRead,BufNewFile', '*.mli', 'set', 'filetype=ocaml.ocaml_interface'},
   {'BufRead,BufNewFile', '*.mly', 'set', 'filetype=menhir'},
   {'BufRead,BufNewFile', '*.mll', 'set', 'filetype=ocamllex'},
-  {'BufRead,BufNewFile', '*.lus', 'set', 'filetype=lus'}
+  {'BufRead,BufNewFile', '*.lus', 'set', 'filetype=lus'},
+  {'BufRead,BufNewFile', '*.imp', 'set', 'filetype=imp'},
+  {'BufRead,BufNewFile', '*.rml', 'set', 'filetype=rml'},
 }, 'BufE')
 
 local home = os.getenv('HOME')
@@ -141,7 +143,6 @@ R('gitsigns').setup()
 R('lspkind').init()
 R('indent_guides').setup()
 RELOADER = function()
-  R('elem.lspsaga')
   R('elem.nvim-cmp')
   R('elem.treesitter')
   R('elem.statusline')
