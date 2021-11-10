@@ -76,6 +76,8 @@ vim.api.nvim_set_keymap('n', '<Down>', [[:echoerr "Do not do that!!"<cr>]], {nor
 vim.api.nvim_set_keymap('n', '<Left>', [[:echoerr "Do not do that!!"<cr>]], {noremap = true})
 vim.api.nvim_set_keymap('n', '<Right>', [[:echoerr "Do not do that!!"<cr>]], {noremap = true})
 
+vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', {noremap = true})
+
 utils.create_augroup(
 {
   {'FileType', '*', 'setlocal', 'shiftwidth=4'},
@@ -103,12 +105,13 @@ utils.create_augroup({
   {'BufRead,BufNewFile', '*.lus', 'set', 'filetype=lus'},
   {'BufRead,BufNewFile', '*.imp', 'set', 'filetype=imp'},
   {'BufRead,BufNewFile', '*.rml', 'set', 'filetype=rml'},
+  {'BufRead,BufNewFile', '*.sage', 'set', 'filetype=sage'},
 }, 'BufE')
 
 local home = os.getenv('HOME')
 
-vim.api.nvim_set_var('python_host_prog', home .. '/opt/miniconda3/envs/conda2/bin/python')
-vim.api.nvim_set_var('python3_host_prog', home .. '/opt/miniconda3/envs/conda3/bin/python')
+-- vim.api.nvim_set_var('python_host_prog', home .. '/opt/miniconda3/envs/conda2/bin/python')
+-- vim.api.nvim_set_var('python3_host_prog', home .. 'Users/emilienlemaire/mambaforge/envs/nvim/bin/python')
 vim.api.nvim_set_var('ruby_host_prog', '/opt/homebrew/lib/ruby/gems/3.0.0/gems/neovim-0.8.1/exe/neovim-ruby-host')
 
 vim.api.nvim_set_var('opamshare', home .. '/.opam/default/share')
@@ -148,7 +151,7 @@ RELOADER = function()
   R('elem.statusline')
   R('elem.plenary')
   R('elem.telescope')
-  R('elem.iron')
+  R('elem.ripple')
   R('elem.rust-tools')
   R('mappings')
   R('globals')

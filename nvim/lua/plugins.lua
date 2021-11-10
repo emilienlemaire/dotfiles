@@ -32,6 +32,7 @@ return require('packer').startup({
     use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
     use 'wbthomason/lsp-status.nvim'
+    use 'ray-x/lsp_signature.nvim'
     use 'simrat39/rust-tools.nvim'
     use 'mfussenegger/nvim-dap'
 
@@ -68,9 +69,18 @@ return require('packer').startup({
       requires = "nvim-lua/plenary.nvim",
       config = function()
         require("todo-comments").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
+          search = {
+            command = "rg",
+            args = {
+              "--color=never",
+              "--no-heading",
+              "--with-filename",
+              "--line-number",
+              "--column",
+              "-g",
+              "!vendor/*"
+            },
+          },
         }
       end
     }
@@ -117,6 +127,7 @@ return require('packer').startup({
     -- {{{ LANGUAGES
 
     use 'ocaml/vim-ocaml'
+    use 'paulpatault/virtual-types.nvim'
     use 'ELLIOTTCABLE/vim-menhir'
     use 'cdelledonne/vim-cmake'
     use 'tpope/vim-markdown'

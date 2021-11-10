@@ -48,20 +48,6 @@ utils.map('n', '<leader>tg', ':FloatermNew lazygit<cr>', options)
 -- }}}
 
 -- {{{ lsp
-utils.map_lua('n', '<c-]>', [[vim.lsp.buf.definition()]], options)
-utils.map_lua('n', 'gD', [[vim.lsp.buf.implementation()]], options)
-utils.map_lua('n', 'gs', [[vim.lsp.buf.signature_help()]], options)
-utils.map_lua('n', 'gT', [[vim.lsp.buf.type_definition()]], options)
-utils.map_lua('n', 'grf', [[vim.lsp.buf.references()]], options)
-utils.map_lua('n', 'g0', [[vim.lsp.buf.document_symbol()]], options)
-utils.map_lua('n', 'gW', [[vim.lsp.buf.workspace_symbol()]], options)
-utils.map_lua('n', 'K', [[vim.lsp.buf.hover()]], options)
-utils.map_lua('n', '<leader>cd', [[vim.lsp.diagnostic.show_line_diagnostics()]], options)
-utils.map_lua('n', '<leader>ca', [[vim.lsp.buf.code_action()]], options)
-utils.map_lua('n', '<leader>rn', [[vim.lsp.buf.rename()]], options)
-utils.map('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
-
-utils.map('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
 -- }}}
 
 -- {{{ telescope
@@ -92,7 +78,7 @@ utils.map_lua('n', '<leader>dl', [[require'dap'.run_last()]], options)
 -- }}}
 
 -- {{{ iron.nvim
-utils.map('n', ']x', "yrih", options)
+utils.map('n', ']x', "yrih", {silent = true})
 -- }}}
 --
 -- {{{ lsptrouble

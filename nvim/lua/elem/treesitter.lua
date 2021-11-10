@@ -10,6 +10,8 @@ parser_config.yapl = {
   filetype = "yapl",
 }
 
+parser_config.python.used_by = "sage"
+
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true, -- false will disable the whole extension

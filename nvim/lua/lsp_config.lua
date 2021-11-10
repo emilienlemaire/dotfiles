@@ -1,11 +1,31 @@
 local lsp = require('lspconfig')
 local nvim_status = require('lsp-status')
+local utils = require('utils')
 local status = require('elem.lsp_status')
 
 status.activate()
 
 local custom_attach = function(client)
+  local options = {
+    noremap = true,
+    silent = true,
+  }
+
+  utils.map_lua_buf('n', '<c-]>', [[vim.lsp.buf.definition()]], options)
+  utils.map_lua_buf('n', 'gD', [[vim.lsp.buf.implementation()]], options)
+  utils.map_lua_buf('n', 'gs', [[vim.lsp.buf.signature_help()]], options)
+  utils.map_lua_buf('n', 'gT', [[vim.lsp.buf.type_definition()]], options)
+  utils.map_lua_buf('n', 'grf', [[vim.lsp.buf.references()]], options)
+  utils.map_lua_buf('n', 'g0', [[vim.lsp.buf.document_symbol()]], options)
+  utils.map_lua_buf('n', 'gW', [[vim.lsp.buf.workspace_symbol()]], options)
+  utils.map_lua_buf('n', 'K', [[vim.lsp.buf.hover()]], options)
+  utils.map_lua_buf('n', '<leader>cd', [[vim.lsp.diagnostic.show_line_diagnostics()]], options)
+  utils.map_lua_buf('n', '<leader>ca', [[vim.lsp.buf.code_action()]], options)
+  utils.map_lua_buf('n', '<leader>rn', [[vim.lsp.buf.rename()]], options)
+  utils.map_buf('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
+  utils.map_buf('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
   status.on_attach(client)
+  require "lsp_signature".on_attach()
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -74,7 +94,9 @@ lsp.texlab.setup({
 })
 
 lsp.cmake.setup({
-  on_attach = custom_attach,
+  on_attach = function(client)
+    require "lsp_signature".on_attach()
+  end,
   capabilities = capabilities
 })
 
@@ -95,8 +117,9 @@ lsp.html.setup {
   capabilities = capabilities,
 }
 
-lsp.pylsp.setup({
-  on_attach = custom_attach
+lsp.jedi_language_server.setup({
+  on_attach = custom_attach,
+  filetypes = { "python", "sage" }
 })
 
 local format_async = function(err, _, result, _, bufnr)
@@ -219,7 +242,10 @@ configs.ocamlls = {
 }
 
 lsp.ocamlls.setup{
-  on_attach = custom_attach
+  on_attach = function(client)
+    custom_attach(client)
+    require'virtualtypes'.on_attach()
+  end
 }
 
 configs.nasm_lsp = {
