@@ -6,6 +6,8 @@ local b = vim.bo
 
 local utils = require('utils')
 
+local _ = require('bootstrap')
+
 g.mapleader = ';'
 
 b.autoindent = true
@@ -62,6 +64,8 @@ o.completeopt = [[menuone,noselect]]
 o.ignorecase = true
 o.smartcase = true
 
+b.shiftwidth = 4
+
 -- General mappings, not depending on any plugins
 vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<cr>gv=gv]], {noremap = true})
 vim.api.nvim_set_keymap('v', 'K', [[:m '<-2<cr>gv=gv]], {noremap = true})
@@ -77,36 +81,6 @@ vim.api.nvim_set_keymap('n', '<Left>', [[:echoerr "Do not do that!!"<cr>]], {nor
 vim.api.nvim_set_keymap('n', '<Right>', [[:echoerr "Do not do that!!"<cr>]], {noremap = true})
 
 vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', {noremap = true})
-
-utils.create_augroup(
-{
-  {'FileType', '*', 'setlocal', 'shiftwidth=4'},
-  {
-    'FileType',
-    'ocaml,ocaml.ocaml_interface,lua,nix,javascript,js,ts,tsx,typescript,typescriptreact,html',
-    'setlocal',
-    'shiftwidth=2'
-  },
-  {
-    'FileType',
-    'ocaml,ocaml.ocaml_interface,menhir,ocamllex',
-    'source',
-    [[~/.opam/default/share/ocp-indent/vim/indent/ocaml.vim]],
-  },
-},
-'FTAucmd')
-
-utils.create_augroup({
-  {'BufRead,BufNewFile', '*.md', 'set', 'filetype=mkd'},
-  {'BufRead,BufNewFile', '*.yapl', 'set', 'filetype=yapl'},
-  {'BufRead,BufNewFile', '*.mli', 'set', 'filetype=ocaml.ocaml_interface'},
-  {'BufRead,BufNewFile', '*.mly', 'set', 'filetype=menhir'},
-  {'BufRead,BufNewFile', '*.mll', 'set', 'filetype=ocamllex'},
-  {'BufRead,BufNewFile', '*.lus', 'set', 'filetype=lus'},
-  {'BufRead,BufNewFile', '*.imp', 'set', 'filetype=imp'},
-  {'BufRead,BufNewFile', '*.rml', 'set', 'filetype=rml'},
-  {'BufRead,BufNewFile', '*.sage', 'set', 'filetype=sage'},
-}, 'BufE')
 
 local home = os.getenv('HOME')
 
@@ -124,8 +98,10 @@ utils.add_rtp(home .. '/.opam/default/share/merlin/vimbufsync')
 
 -- REQUIRES
 
+require('hotpot')
 require('plugins')
-
+require('zest').setup()
+require("elem.autocmds")
 local ok, res = pcall(function() require('lsp_config') end)
 
 if not ok then
@@ -144,7 +120,6 @@ end
 R('nvim-web-devicons').setup()
 R('gitsigns').setup()
 R('lspkind').init()
-R('indent_guides').setup()
 RELOADER = function()
   R('elem.nvim-cmp')
   R('elem.treesitter')
@@ -160,8 +135,7 @@ end
 
 RELOADER()
 
-utils.map_lua('n', '<leader>rc', 'RELOADER()', {noremap = true})
-cmd [[colorscheme catppuccino]]
+cmd [[colorscheme catppuccin]]
 
 cmd  [[hi DiagnosticUnderlineError gui=undercurl guisp=Red]]
 cmd  [[hi DiagnosticUnderlineWarn gui=undercurl guisp=Orange]]

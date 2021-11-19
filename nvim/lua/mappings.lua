@@ -19,9 +19,7 @@ utils.map('n', '<c-l>', ':wincmd l<cr>', options)
 
 --{{{ cmake
 utils.map('n', '<leader>b', ':CMakeBuild<cr>', options)
-utils.map('n', '<leader>g',
-':CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=1 <cr>',
-options)
+utils.map('n', '<leader>g', ':CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=1 <cr>', options)
 --}}}
 
 -- {{{ vsnip

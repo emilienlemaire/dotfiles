@@ -74,11 +74,6 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/BetterLua.vim",
     url = "https://github.com/euclidianAce/BetterLua.vim"
   },
-  ["Catppuccino.nvim"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/Catppuccino.nvim",
-    url = "https://github.com/Pocco81/Catppuccino.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -124,6 +119,11 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/colorizer",
     url = "https://github.com/lilydjwg/colorizer"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
   ["express_line.nvim"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/express_line.nvim",
@@ -139,10 +139,17 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/gruvbox",
     url = "https://github.com/morhetz/gruvbox"
   },
-  ["indent-guides.nvim"] = {
+  ["hotpot.nvim"] = {
+    config = { "\27LJ\2\nt\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\vmacros\1\0\1\benv\14_COMPILER\fmodules\1\0\0\1\2\0\0\tzest\nsetup\vhotpot\frequire\0" },
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/indent-guides.nvim",
-    url = "https://github.com/glepnir/indent-guides.nvim"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/hotpot.nvim",
+    url = "https://github.com/rktjmp/hotpot.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    config = { "\27LJ\2\nq\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\20buftype_exclude\1\2\0\0\rterminal\1\0\1\tchar\6|\nsetup\21indent_blankline\frequire\0" },
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["jupytext.vim"] = {
     loaded = true,
@@ -183,6 +190,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nlua.nvim",
     url = "https://github.com/tjdevries/nlua.nvim"
+  },
+  nvim = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim",
+    url = "https://github.com/catppuccin/nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -226,9 +238,8 @@ _G.packer_plugins = {
     url = "https://github.com/joshdick/onedark.vim"
   },
   ["packer.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/opt/packer.nvim",
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   playground = {
@@ -255,6 +266,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
+  },
+  ["targets.vim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/targets.vim",
+    url = "https://github.com/wellle/targets.vim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -387,18 +403,36 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/opt/yaml.nvim",
     url = "https://github.com/cuducos/yaml.nvim"
+  },
+  ["zest.nvim"] = {
+    config = { "\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tzest\frequire\0" },
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/zest.nvim",
+    url = "https://github.com/tsbohc/zest.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\nq\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\20buftype_exclude\1\2\0\0\rterminal\1\0\1\tchar\6|\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
 -- Config for: todo-comments.nvim
 time([[Config for todo-comments.nvim]], true)
 try_loadstring("\27LJ\2\n¿\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\3\0005\4\4\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\vsearch\1\0\0\targs\1\b\0\0\18--color=never\17--no-heading\20--with-filename\18--line-number\r--column\a-g\14!vendor/*\1\0\1\fcommand\arg\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
 time([[Config for todo-comments.nvim]], false)
+-- Config for: hotpot.nvim
+time([[Config for hotpot.nvim]], true)
+try_loadstring("\27LJ\2\nt\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\vmacros\1\0\1\benv\14_COMPILER\fmodules\1\0\0\1\2\0\0\tzest\nsetup\vhotpot\frequire\0", "config", "hotpot.nvim")
+time([[Config for hotpot.nvim]], false)
 -- Config for: trouble.nvim
 time([[Config for trouble.nvim]], true)
 try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
 time([[Config for trouble.nvim]], false)
+-- Config for: zest.nvim
+time([[Config for zest.nvim]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tzest\frequire\0", "config", "zest.nvim")
+time([[Config for zest.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads

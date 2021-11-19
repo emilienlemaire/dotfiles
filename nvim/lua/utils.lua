@@ -3,15 +3,6 @@ local cmd = vim.cmd
 cmd [[packadd packer.nvim]]
 local packer = require('packer')
 
-function M.create_augroup(autocmds, name)
-  cmd ('augroup ' .. name)
-  cmd('autocmd!')
-  for _, autocmd in ipairs(autocmds) do
-    cmd('autocmd ' .. table.concat(autocmd, ' '))
-  end
-  cmd('augroup END')
-end
-
 function M.add_rtp(path)
   local rtp = vim.o.rtp
   rtp = rtp .. ',' .. path
@@ -53,51 +44,15 @@ function M.reload_plugins()
     packer.compile()
 end
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-    return true
+function M.get_system_name()
+  if vim.fn.has("mac") == 1 then
+    return "macOS"
+  elseif vim.fn.has("unix") == 1 then
+    return "Linux"
+  elseif vim.fn.has('win32') == 1 then
+    return "Windows"
   else
-    return false
-  end
-end
-
-function M.tab_complete()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-
-function M.s_tab_complete()
-  if vim.fn.pumvisible() then
-    return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    t "<Plug>(vsnip-jump-prev)"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-function M.completion_confirm()
-  local npairs = require('nvim-autopairs')
-  if vim.fn.pumvisible() ~= 0 then
-    if vim.fn.complete_info()["selected"] ~= -1 then
-      return npairs.esc("<c-y>")
-    else
-      return npairs.esc("<cr>")
-    end
-  else
-    return npairs.check_break_line_char()
+    print("Unsupported system for sumneko")
   end
 end
 

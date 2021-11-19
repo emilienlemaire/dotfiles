@@ -15,7 +15,7 @@ return require('packer').startup({
     }
     use '~/nvim-plugins/llvm-vim'
 
-    use {'wbthomason/packer.nvim', opt = true}
+    use 'wbthomason/packer.nvim'
     --{{{ LSP
     use 'neovim/nvim-lspconfig'
 
@@ -43,6 +43,26 @@ return require('packer').startup({
     --}}}
 
     --{{{ UTILS
+    use 'wellle/targets.vim'
+    use {
+      'rktjmp/hotpot.nvim',
+      config = function()
+              require("hotpot").setup({
+                modules = {'zest'},
+                macros = {
+                  env = '_COMPILER'
+          }
+        })
+      end
+    }
+
+    use {
+      'tsbohc/zest.nvim',
+      config = function()
+        require('zest').setup()
+      end
+    }
+
     use {
       'vigoux/treesitter-context.nvim',
       requires = { 'nvim-treesitter/nvim-treesitter' }
@@ -106,6 +126,7 @@ return require('packer').startup({
 
     use 'lewis6991/gitsigns.nvim'
     use 'TimUntersberger/neogit'
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     use 'onsails/lspkind-nvim'
 
     use 'GCBallesteros/jupytext.vim'
@@ -156,7 +177,7 @@ return require('packer').startup({
     -- }}}
 
     -- {{{ COLORSCHEMES
-    use 'Pocco81/Catppuccino.nvim'
+    use 'catppuccin/nvim'
 
     use 'morhetz/gruvbox'
 
@@ -170,7 +191,15 @@ return require('packer').startup({
     use {'Th3Whit3Wolf/one-nvim', opt = true}
     use 'joshdick/onedark.vim'
 
-    use 'glepnir/indent-guides.nvim'
+    use {
+      'lukas-reineke/indent-blankline.nvim',
+      config = function()
+        require('indent_blankline').setup{
+          char = "|",
+          buftype_exclude = {'terminal'}
+        }
+      end
+    }
 
     use 'lilydjwg/colorizer'
 

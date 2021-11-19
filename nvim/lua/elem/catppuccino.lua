@@ -1,10 +1,7 @@
-local catppuccino = require('catppuccino')
-local cat_api = require('catppuccino.api.colors')
-local err, colors = cat_api.get_colors("dark_catppuccino")
+local catppuccin = require('catppuccin')
 
-catppuccino.setup({
-  colorscheme = "dark_catppuccino",
-  transparency = true,
+catppuccin.setup({
+  transparent_background = true,
   integrations = {
     treesitter = true,
     native_lsp = {
