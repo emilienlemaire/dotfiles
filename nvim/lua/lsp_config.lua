@@ -118,39 +118,10 @@ lsp.clojure_lsp.setup {
   capabilities = capabilities
 }
 
-local configs = require('lspconfig/configs')
-
-configs.ocamlls = {
-  default_config = {
-    cmd = {'ocamllsp'};
-    filetypes = {'ocaml', 'ocaml_interface', 'ocaml.ocaml_interface', 'menhir', 'ocamllex'};
-    root_dir = function(fname)
-      return lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-    end;
-    settings = {};
-  };
-}
-
-lsp.ocamlls.setup{
+lsp.ocamllsp.setup{
   on_attach = function(client)
     custom_attach(client)
     require'virtualtypes'.on_attach()
   end
 }
-
-configs.nasm_lsp = {
-  default_config = {
-    cmd = {'nasm-lsp'};
-    filetypes = {'nasm'};
-    root_dir = function(fname)
-      return lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-    end;
-    settings = {};
-  };
-}
-
-lsp.nasm_lsp.setup({
-  on_attach = custom_attach
-})
-
 

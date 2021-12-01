@@ -64,7 +64,6 @@ o.completeopt = [[menuone,noselect]]
 o.ignorecase = true
 o.smartcase = true
 
-b.shiftwidth = 4
 
 -- General mappings, not depending on any plugins
 vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<cr>gv=gv]], {noremap = true})
@@ -139,4 +138,4 @@ cmd [[colorscheme catppuccin]]
 
 cmd  [[hi DiagnosticUnderlineError gui=undercurl guisp=Red]]
 cmd  [[hi DiagnosticUnderlineWarn gui=undercurl guisp=Orange]]
-
+b.shiftwidth = 4

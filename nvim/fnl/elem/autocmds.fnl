@@ -18,7 +18,8 @@
       :typescriptreact
       :html
     ]
-    ":setlocal shiftwidth=2"))
+    ":setlocal shiftwidth=2")
+  (au- :FileType :* ":setlocal shiftwidth=4"))
 
 (gr- :ocaml-indent
   (au- :FileType
@@ -32,6 +33,7 @@
     :mly  "menhir"
     :mll  "ocamllex"
     :lus  "lus"
+    :mls  "lus"
     :imp  "imp"
     :rml  "rml"
   })
