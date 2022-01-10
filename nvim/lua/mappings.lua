@@ -32,8 +32,8 @@ utils.map('s', '<C-j>', [[vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' :
 -- }}}
 
 -- {{{ diagnostics
-utils.map_lua('n', '<leader>dn', [[vim.lsp.diagnostic.goto_next()]], options)
-utils.map_lua('n', '<leader>dp', [[vim.lsp.diagnostic.goto_prev()]], options)
+utils.map_lua('n', '<leader>dn', [[vim.diagnostic.goto_next()]], options)
+utils.map_lua('n', '<leader>dp', [[vim.diagnostic.goto_prev()]], options)
 -- }}}
 
 -- {{{ EasyAlign

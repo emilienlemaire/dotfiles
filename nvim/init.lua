@@ -97,10 +97,14 @@ utils.add_rtp(home .. '/.opam/default/share/merlin/vimbufsync')
 
 -- REQUIRES
 
-require('hotpot')
 require('plugins')
 require('zest').setup()
-require("elem.autocmds")
+require("hotpot").setup({
+    modules = {'zest'},
+    macros = {
+        env = '_COMPILER'
+    }
+})
 local ok, res = pcall(function() require('lsp_config') end)
 
 if not ok then
@@ -120,6 +124,7 @@ R('nvim-web-devicons').setup()
 R('gitsigns').setup()
 R('lspkind').init()
 RELOADER = function()
+  R("elem.autocmds")
   R('elem.nvim-cmp')
   R('elem.treesitter')
   R('elem.statusline')

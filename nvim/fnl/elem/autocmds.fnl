@@ -36,6 +36,7 @@
     :mls  "lus"
     :imp  "imp"
     :rml  "rml"
+    :thy  "isabelle"
   })
 
 (fn make_au [ext cmd]
@@ -44,5 +45,5 @@
 
 (gr- :extensions
   (each [ext ft (pairs fts)]
-     (make_au (.. "*.") (.. ":setfiletype " ft))))
+     (make_au (.. "*." ext) (.. ":setfiletype " ft))))
 

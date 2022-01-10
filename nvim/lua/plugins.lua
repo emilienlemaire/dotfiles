@@ -40,6 +40,19 @@ return require('packer').startup({
     use 'hrsh7th/vim-vsnip-integ'
     use 'kitagry/vs-snippets'
 
+    --[[ use {
+        'neoclide/coc.nvim',
+        branch = 'master',
+        run = 'yarn install --forzen-lockfile'
+    }
+
+    use {
+        'ThreeFx/coc-isabelle',
+        run = 'yarn install --frozen-lockfile'
+    }
+
+    use 'ThreeFx/isabelle.vim' ]]
+
     --}}}
 
     --{{{ UTILS
@@ -47,12 +60,6 @@ return require('packer').startup({
     use {
       'rktjmp/hotpot.nvim',
       config = function()
-              require("hotpot").setup({
-                modules = {'zest'},
-                macros = {
-                  env = '_COMPILER'
-          }
-        })
       end
     }
 
@@ -80,6 +87,7 @@ return require('packer').startup({
     use {'nvim-telescope/telescope-fzf-native.nvim', run='make'}
 
     use 'machakann/vim-sandwich'
+    use 'junegunn/vim-easy-align'
 
     use 'pbrisbin/vim-mkdir'
 
@@ -177,7 +185,10 @@ return require('packer').startup({
     -- }}}
 
     -- {{{ COLORSCHEMES
-    use 'catppuccin/nvim'
+    use {
+        'catppuccin/nvim',
+        as = 'catppuccin'
+    }
 
     use 'morhetz/gruvbox'
 

@@ -62,7 +62,7 @@ local  generator = function()
     )
   )
 
-  table.insert(el_segments, builtin.responsive_file(140, 90))
+  table.insert(el_segments, builtin.make_responsive_file(140, 90))
 
   table.insert(el_segments,
     sections.collapse_builtin{

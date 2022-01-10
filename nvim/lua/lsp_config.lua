@@ -19,7 +19,7 @@ local custom_attach = function(client)
   utils.map_lua_buf('n', 'g0', [[vim.lsp.buf.document_symbol()]], options)
   utils.map_lua_buf('n', 'gW', [[vim.lsp.buf.workspace_symbol()]], options)
   utils.map_lua_buf('n', 'K', [[vim.lsp.buf.hover()]], options)
-  utils.map_lua_buf('n', '<leader>cd', [[vim.lsp.diagnostic.show_line_diagnostics()]], options)
+  utils.map_lua_buf('n', '<leader>sd', [[vim.diagnostic.open_float()]], options)
   utils.map_lua_buf('n', '<leader>ca', [[vim.lsp.buf.code_action()]], options)
   utils.map_lua_buf('n', '<leader>rn', [[vim.lsp.buf.rename()]], options)
   utils.map_buf('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
@@ -125,3 +125,22 @@ lsp.ocamllsp.setup{
   end
 }
 
+local configs = require("lspconfig.configs")
+
+if not configs.isabelle then
+  configs.isabelle = {
+    default_config = {
+        cmd = {'isabelle', 'vscode_server', '-v', '-L', '/tmp/isalsp.log', '-o', 'vscode_html_output=false'},
+        filetypes = {'isabelle'},
+        root_dir = function(fname)
+            return lsp.util.find_git_ancestor(fname) or vim.fn.getcwd()
+        end,
+        settings = {}
+  }
+}
+end
+
+lsp.isabelle.setup{
+  on_attach = custom_attach,
+  capabilities = capabilities
+}
