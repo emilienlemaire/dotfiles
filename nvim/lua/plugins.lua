@@ -27,7 +27,9 @@ return require('packer').startup({
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/cmp-nvim-lsp-document-symbol'
+    use 'saadparwaiz1/cmp_luasnip'
+    -- use 'hrsh7th/cmp-vsnip'
     use 'kdheepak/cmp-latex-symbols'
     use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
@@ -36,9 +38,12 @@ return require('packer').startup({
     use 'simrat39/rust-tools.nvim'
     use 'mfussenegger/nvim-dap'
 
-    use 'hrsh7th/vim-vsnip'
+    use 'L3MON4D3/LuaSnip'
+    use 'rafamadriz/friendly-snippets'
+    use 'benfowler/telescope-luasnip.nvim'
+    --[[ use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
-    use 'kitagry/vs-snippets'
+    use 'kitagry/vs-snippets' ]]
 
     --[[ use {
         'neoclide/coc.nvim',
@@ -147,6 +152,32 @@ return require('packer').startup({
     }
 
     use 'vimwiki/vimwiki'
+
+    use {
+      'nvim-neorg/neorg',
+      config = function()
+        require('neorg').setup {
+          load = {
+            ["core.defaults"] = {}, -- Load all the default modules
+            ["core.keybinds"] = { -- Configure core.keybinds
+              config = {
+                default_keybinds = true, -- Generate the default keybinds
+                neorg_leader = "<Leader>o" -- This is the default if unspecified
+              }
+            },
+            ["core.norg.concealer"] = {}, -- Allows for use of icons
+            ["core.norg.dirman"] = { -- Manage your directories with Neorg
+              config = {
+                workspaces = {
+                  my_workspace = "~/neorg"
+                }
+              }
+            }
+          },
+        }
+      end,
+      requires = 'nvim-lua/plenary.nvim',
+    }
 
     use 'b3nj5m1n/kommentary'
 

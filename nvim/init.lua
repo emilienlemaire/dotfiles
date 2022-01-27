@@ -64,7 +64,6 @@ o.completeopt = [[menuone,noselect]]
 o.ignorecase = true
 o.smartcase = true
 
-
 -- General mappings, not depending on any plugins
 vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<cr>gv=gv]], {noremap = true})
 vim.api.nvim_set_keymap('v', 'K', [[:m '<-2<cr>gv=gv]], {noremap = true})
@@ -96,7 +95,6 @@ utils.add_rtp(home .. '/.opam/default/share/merlin/vim')
 utils.add_rtp(home .. '/.opam/default/share/merlin/vimbufsync')
 
 -- REQUIRES
-
 require('plugins')
 require('zest').setup()
 require("hotpot").setup({
@@ -125,6 +123,7 @@ R('gitsigns').setup()
 R('lspkind').init()
 RELOADER = function()
   R("elem.autocmds")
+  R('elem.luasnip')
   R('elem.nvim-cmp')
   R('elem.treesitter')
   R('elem.statusline')

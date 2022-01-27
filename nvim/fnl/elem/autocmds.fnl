@@ -18,8 +18,7 @@
       :typescriptreact
       :html
     ]
-    ":setlocal shiftwidth=2")
-  (au- :FileType :* ":setlocal shiftwidth=4"))
+    ":setlocal shiftwidth=2"))
 
 (gr- :ocaml-indent
   (au- :FileType

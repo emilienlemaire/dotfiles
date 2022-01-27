@@ -41,16 +41,17 @@ cmp.setup {
   },
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   sources = {
-    { name = "vsnip" },
+    { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "cmp_tabnine" },
     { name = "path" },
     { name = "nvim_lua" },
     -- { name = "latex_symbols" },
+    { name = "neorg" },
     { name = "buffer" },
   },
   mapping = {

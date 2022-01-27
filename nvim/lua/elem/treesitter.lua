@@ -1,8 +1,8 @@
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
-parser_config.ocaml_interface.used_by = "ocaml_interface"
+parser_configs.ocaml_interface.used_by = "ocaml_interface"
 
-parser_config.yapl = {
+parser_configs.yapl = {
   install_info = {
     url = "https://github.com/emilienlemaire/tree-sitter-yapl.git",
     files = {"src/parser.c"}
@@ -10,7 +10,31 @@ parser_config.yapl = {
   filetype = "yapl",
 }
 
-parser_config.python.used_by = "sage"
+parser_configs.norg = {
+  install_info = {
+    url = "https://github.com/nvim-neorg/tree-sitter-norg",
+    files = { "src/parser.c", 'src/scanner.cc' },
+    branch = "main"
+  },
+}
+
+parser_configs.norg_meta = {
+  install_info = {
+    url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
+    files = { "src/parser.c" },
+    branch = "main"
+  },
+}
+
+parser_configs.norg_table = {
+  install_info = {
+    url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
+    files = { "src/parser.c" },
+    branch = "main"
+  },
+}
+
+parser_configs.python.used_by = "sage"
 
 require('nvim-treesitter.configs').setup {
   highlight = {
@@ -25,82 +49,81 @@ require('nvim-treesitter.configs').setup {
       scope_incremental = 'gns', -- increment to the upper scope (as defined in locals.scm)
       node_decremental = 'grm',  -- decrement to the previous node
     },
-  },
-
-  refactor = {
-    highlight_definitions = {enable = true},
-    highlight_current_scope = {enable = false},
-    smart_rename = {
-      enable = true,
-      keymaps = {
-        -- mapping to rename reference under cursor
-        smart_rename = 'grn',
-      },
-    },
-
-    -- TODO: This seems broken...
-    navigation = {
-      enable = true,
-      keymaps = {
-        goto_definition = 'gnd', -- mapping to go to definition of symbol under cursor
-        list_definitions = 'gnD', -- mapping to list all definitions in current file
-      },
+},
+refactor = {
+  highlight_definitions = {enable = true},
+  highlight_current_scope = {enable = false},
+  smart_rename = {
+    enable = true,
+    keymaps = {
+      -- mapping to rename reference under cursor
+      smart_rename = 'grn',
     },
   },
-   textobjects = { -- syntax-aware textobjects
-     enable = true,
-     disable = {},
-     keymaps = {
-       ['iL'] = { -- you can define your own textobjects directly here
-         python = '(function_definition) @function',
-         cpp = '(function_definition) @function',
-         c = '(function_definition) @function',
-         java = '(method_declaration) @function',
-       },
-       -- or you use the queries from supported languages with textobjects.scm
-       ['af'] = '@function.outer',
-       ['if'] = '@function.inner',
-       ['aC'] = '@class.outer',
-       ['iC'] = '@class.inner',
-       ['ac'] = '@conditional.outer',
-       ['ic'] = '@conditional.inner',
-       ['ae'] = '@block.outer',
-       ['ie'] = '@block.inner',
-       ['al'] = '@loop.outer',
-       ['il'] = '@loop.inner',
-       ['is'] = '@statement.inner',
-       ['as'] = '@statement.outer',
-       ['ad'] = '@comment.outer',
-       ['am'] = '@call.outer',
-       ['im'] = '@call.inner',
+
+  -- TODO: This seems broken...
+  navigation = {
+    enable = true,
+    keymaps = {
+      goto_definition = 'gnd', -- mapping to go to definition of symbol under cursor
+      list_definitions = 'gnD', -- mapping to list all definitions in current file
+    },
+  },
+},
+textobjects = { -- syntax-aware textobjects
+enable = true,
+disable = {},
+keymaps = {
+  ['iL'] = { -- you can define your own textobjects directly here
+  python = '(function_definition) @function',
+  cpp = '(function_definition) @function',
+  c = '(function_definition) @function',
+  java = '(method_declaration) @function',
+},
+-- or you use the queries from supported languages with textobjects.scm
+['af'] = '@function.outer',
+['if'] = '@function.inner',
+['aC'] = '@class.outer',
+['iC'] = '@class.inner',
+['ac'] = '@conditional.outer',
+['ic'] = '@conditional.inner',
+['ae'] = '@block.outer',
+['ie'] = '@block.inner',
+['al'] = '@loop.outer',
+['il'] = '@loop.inner',
+['is'] = '@statement.inner',
+['as'] = '@statement.outer',
+['ad'] = '@comment.outer',
+['am'] = '@call.outer',
+['im'] = '@call.inner',
      },
      indent = {
        enable = false,
      },
    },
-  ensure_installed = {
-  'bash',
-  'c',
-  'cpp',
-  'css',
-  'html',
-  'javascript',
-  'json',
-  'jsonc',
-  'latex',
-  'lua',
-  'nix',
-  'ocaml',
-  'ocaml_interface',
-  'ocamllex',
-  'php',
-  'python',
-  'scss',
-  'toml',
-  'tsx',
-  'typescript',
-  'vue',
-  'yaml'
-}
--- one of 'all', 'language', or a list of languages
-}
+   ensure_installed = {
+     'bash',
+     'c',
+     'cpp',
+     'css',
+     'html',
+     'javascript',
+     'json',
+     'jsonc',
+     'latex',
+     'lua',
+     'nix',
+     'ocaml',
+     'ocaml_interface',
+     'ocamllex',
+     'php',
+     'python',
+     'scss',
+     'toml',
+     'tsx',
+     'typescript',
+     'vue',
+     'yaml'
+   }
+   -- one of 'all', 'language', or a list of languages
+ }

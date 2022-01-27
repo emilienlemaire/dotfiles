@@ -50,6 +50,7 @@ require('telescope').setup{
 }
 
 pcall(require('telescope').load_extension, 'fzf_native')
+require('telescope').load_extension('luasnip')
 
 local M = {}
 

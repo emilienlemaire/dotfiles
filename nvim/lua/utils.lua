@@ -6,6 +6,7 @@ local packer = require('packer')
 function M.add_rtp(path)
   local rtp = vim.o.rtp
   rtp = rtp .. ',' .. path
+  vim.o.rtp = rtp
 end
 
 function M.map(mode, keys, action, options)
