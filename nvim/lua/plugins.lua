@@ -13,6 +13,21 @@ return require('packer').startup({
         require("yaml_nvim").init()
       end,
     }
+
+    use {
+      "https://git.sr.ht/~havi/telescope-toggleterm.nvim",
+      event = "TermOpen",
+      requires = {
+        "akinsho/nvim-toggleterm.lua",
+        "nvim-telescope/telescope.nvim",
+        "nvim-lua/popup.nvim",
+        "nvim-lua/plenary.nvim",
+      },
+      config = function()
+        require("telescope").load_extension "toggleterm"
+      end,
+    }
+
     use '~/nvim-plugins/llvm-vim'
 
     use 'wbthomason/packer.nvim'
@@ -35,28 +50,12 @@ return require('packer').startup({
 
     use 'wbthomason/lsp-status.nvim'
     use 'ray-x/lsp_signature.nvim'
-    use 'simrat39/rust-tools.nvim'
+    -- use 'simrat39/rust-tools.nvim'
     use 'mfussenegger/nvim-dap'
 
     use 'L3MON4D3/LuaSnip'
     use 'rafamadriz/friendly-snippets'
     use 'benfowler/telescope-luasnip.nvim'
-    --[[ use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
-    use 'kitagry/vs-snippets' ]]
-
-    --[[ use {
-        'neoclide/coc.nvim',
-        branch = 'master',
-        run = 'yarn install --forzen-lockfile'
-    }
-
-    use {
-        'ThreeFx/coc-isabelle',
-        run = 'yarn install --frozen-lockfile'
-    }
-
-    use 'ThreeFx/isabelle.vim' ]]
 
     --}}}
 
@@ -165,7 +164,9 @@ return require('packer').startup({
                 neorg_leader = "<Leader>o" -- This is the default if unspecified
               }
             },
-            ["core.norg.concealer"] = {}, -- Allows for use of icons
+            ["core.norg.concealer"] = {
+              config = {}
+            }, -- Allows for use of icons
             ["core.norg.dirman"] = { -- Manage your directories with Neorg
               config = {
                 workspaces = {
@@ -182,6 +183,8 @@ return require('packer').startup({
     use 'b3nj5m1n/kommentary'
 
     use 'kevinhwang91/nvim-hlslens'
+
+    use 'akinsho/toggleterm.nvim'
     --}}}
 
     -- {{{ LANGUAGES

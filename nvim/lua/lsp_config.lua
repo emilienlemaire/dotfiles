@@ -11,17 +11,22 @@ local custom_attach = function(client)
     silent = true,
   }
 
-  utils.map_lua_buf('n', '<c-]>', [[vim.lsp.buf.definition()]], options)
-  utils.map_lua_buf('n', 'gD', [[vim.lsp.buf.implementation()]], options)
-  utils.map_lua_buf('n', 'gs', [[vim.lsp.buf.signature_help()]], options)
-  utils.map_lua_buf('n', 'gT', [[vim.lsp.buf.type_definition()]], options)
-  utils.map_lua_buf('n', 'grf', [[vim.lsp.buf.references()]], options)
-  utils.map_lua_buf('n', 'g0', [[vim.lsp.buf.document_symbol()]], options)
-  utils.map_lua_buf('n', 'gW', [[vim.lsp.buf.workspace_symbol()]], options)
-  utils.map_lua_buf('n', 'K', [[vim.lsp.buf.hover()]], options)
-  utils.map_lua_buf('n', '<leader>sd', [[vim.diagnostic.open_float()]], options)
-  utils.map_lua_buf('n', '<leader>ca', [[vim.lsp.buf.code_action()]], options)
-  utils.map_lua_buf('n', '<leader>rn', [[vim.lsp.buf.rename()]], options)
+  local options_buf = {
+    noremap = true,
+    silent = true,
+    buffer = true,
+  }
+  vim.keymap.set('n', '<c-]>', vim.lsp.buf.definition, options_buf)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.implementation, options_buf)
+  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, options_buf)
+  vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, options_buf)
+  vim.keymap.set('n', 'grf', vim.lsp.buf.references, options_buf)
+  vim.keymap.set('n', 'g0', vim.lsp.buf.document_symbol, options_buf)
+  vim.keymap.set('n', 'gW', vim.lsp.buf.workspace_symbol, options_buf)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, options_buf)
+  vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, options_buf)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, options_buf)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, options_buf)
   utils.map_buf('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
   utils.map_buf('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
   status.on_attach(client)
@@ -49,6 +54,13 @@ lsp.clangd.setup({
 lsp.vimls.setup({
   on_attach = custom_attach,
 })
+
+lsp.rust_analyzer.setup{
+  on_attach = function(client)
+    custom_attach(client)
+  end,
+  capabilities
+}
 
 local system_name = utils.get_system_name()
 

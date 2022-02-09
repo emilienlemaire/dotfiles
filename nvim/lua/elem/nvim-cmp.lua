@@ -50,7 +50,7 @@ cmp.setup {
     { name = "cmp_tabnine" },
     { name = "path" },
     { name = "nvim_lua" },
-    -- { name = "latex_symbols" },
+    { name = "latex_symbols" },
     { name = "neorg" },
     { name = "buffer" },
   },

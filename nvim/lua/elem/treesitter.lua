@@ -1,6 +1,8 @@
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
-parser_configs.ocaml_interface.used_by = "ocaml_interface"
+local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+
+ft_to_parser.ocaml_interface = 'ocaml_interface'
 
 parser_configs.yapl = {
   install_info = {
@@ -34,7 +36,7 @@ parser_configs.norg_table = {
   },
 }
 
-parser_configs.python.used_by = "sage"
+ft_to_parser.sage = 'python'
 
 require('nvim-treesitter.configs').setup {
   highlight = {
