@@ -8,7 +8,7 @@ local utils = require('utils')
 
 local _ = require('bootstrap')
 
-g.mapleader = ';'
+g.mapleader = ' '
 
 b.autoindent = true
 b.expandtab = true
@@ -63,6 +63,8 @@ o.completeopt = [[menuone,noselect]]
 
 o.ignorecase = true
 o.smartcase = true
+
+
 
 -- General mappings, not depending on any plugins
 vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<cr>gv=gv]], {noremap = true})
@@ -120,7 +122,6 @@ end
 
 R('nvim-web-devicons').setup()
 R('gitsigns').setup()
-R('lspkind').init()
 RELOADER = function()
   R("elem.autocmds")
   R('elem.luasnip')
@@ -134,6 +135,7 @@ RELOADER = function()
   R('mappings')
   R('globals')
   R('elem.catppuccino')
+  require("fidget").setup()
 end
 
 RELOADER()
@@ -142,4 +144,3 @@ cmd [[colorscheme catppuccin]]
 
 cmd  [[hi DiagnosticUnderlineError gui=undercurl guisp=Red]]
 cmd  [[hi DiagnosticUnderlineWarn gui=undercurl guisp=Orange]]
-b.shiftwidth = 4

@@ -2,6 +2,10 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup({
   function(use)
+
+    use "~/Development/lua/cmake.nvim"
+    use "~/Development/tree-sitter/tree-sitter-menhir"
+
     use {
       "cuducos/yaml.nvim",
       ft = {"yaml"}, -- optional
@@ -57,6 +61,9 @@ return require('packer').startup({
     use 'rafamadriz/friendly-snippets'
     use 'benfowler/telescope-luasnip.nvim'
 
+    use 'nvim-lua/lsp_extensions.nvim'
+
+    use'j-hui/fidget.nvim'
     --}}}
 
     --{{{ UTILS
@@ -196,7 +203,10 @@ return require('packer').startup({
     use 'tpope/vim-markdown'
 
     use 'tjdevries/nlua.nvim'
+    use 'rafcamlet/nvim-luapad'
     use 'euclidianAce/BetterLua.vim'
+
+    use 'Jorengarenar/COBOL.vim'
 
     -- use 'tikhomirov/vim-glsl'
 
@@ -251,6 +261,7 @@ return require('packer').startup({
     -- }}}
   end,
   config =  {
+    max_jobs = 70, -- Noticed it bugged with more than 70 plugins
     display = {
       _open_fn = function(name)
         -- Can only use plenary when we have our plugins.

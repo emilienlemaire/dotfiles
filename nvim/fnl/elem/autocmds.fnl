@@ -46,3 +46,4 @@
   (each [ext ft (pairs fts)]
      (make_au (.. "*." ext) (.. ":setfiletype " ft))))
 
+(au- [:BufEnter :BufWinEnter :TabEnter :BufWritePost] :*.rs ":lua require'lsp_extensions'.inlay_hints{prefix = ' » ', highlight = 'NonText', enabled = {'ChainingHint', 'TypeHint'}}")

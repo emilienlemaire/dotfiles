@@ -6,6 +6,8 @@ local status = require('elem.lsp_status')
 status.activate()
 
 local custom_attach = function(client)
+  vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+
   local options = {
     noremap = true,
     silent = true,
@@ -16,6 +18,7 @@ local custom_attach = function(client)
     silent = true,
     buffer = true,
   }
+
   vim.keymap.set('n', '<c-]>', vim.lsp.buf.definition, options_buf)
   vim.keymap.set('n', 'gD', vim.lsp.buf.implementation, options_buf)
   vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, options_buf)
@@ -29,13 +32,19 @@ local custom_attach = function(client)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, options_buf)
   utils.map_buf('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
   utils.map_buf('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
+
   status.on_attach(client)
+
+  if client.resolved_capabilities.code_lens then
+    require'virtualtypes'.on_attach()
+  end
   require "lsp_signature".on_attach()
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
+updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
+updated_capabilities.textDocument.completion.completionItem.snippetSupport = true
+updated_capabilities = require('cmp_nvim_lsp').update_capabilities(updated_capabilities)
 
 lsp.clangd.setup({
   cmd = {
@@ -46,20 +55,22 @@ lsp.clangd.setup({
     "--header-insertion=iwyu",
     "--cross-file-rename"
   },
+  init_options = {
+    clangdFileStatus = true,
+  },
   on_attach = custom_attach,
   handlers = nvim_status.extensions.clangd.setup(),
-  capabilities = clangd_capabilities,
+  capabilities = updated_capabilities,
 })
 
 lsp.vimls.setup({
   on_attach = custom_attach,
+  capabilities = updated_capabilities,
 })
 
 lsp.rust_analyzer.setup{
-  on_attach = function(client)
-    custom_attach(client)
-  end,
-  capabilities
+  on_attach = custom_attach,
+  capabilities = updated_capabilities,
 }
 
 local system_name = utils.get_system_name()
@@ -90,22 +101,25 @@ lsp.sumneko_lua.setup {
       },
     },
   },
+  capabilities = updated_capabilities,
 }
 
 lsp.texlab.setup({
   on_attach = custom_attach,
+  capabilities = updated_capabilities,
 })
 
 lsp.cmake.setup({
   on_attach = function(client)
     require "lsp_signature".on_attach()
   end,
-  capabilities = capabilities
+  capabilities = updated_capabilities,
 })
 
 require('nlua.lsp.nvim').setup(require('lspconfig'), {
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   on_attach = custom_attach,
+  capabilities = updated_capabilities,
 
   -- Include globals you want to tell the LSP are real :)
   globals = {
@@ -114,27 +128,26 @@ require('nlua.lsp.nvim').setup(require('lspconfig'), {
   }
 })
 
-
 lsp.html.setup {
   on_attach = custom_attach,
-  capabilities = capabilities,
+  capabilities = updated_capabilities,
 }
 
 lsp.jedi_language_server.setup({
   on_attach = custom_attach,
-  filetypes = { "python", "sage" }
+  filetypes = { "python", "sage" },
+  capabilities = updated_capabilities,
 })
 
 lsp.clojure_lsp.setup {
   on_attach = custom_attach,
-  capabilities = capabilities
+  capabilities = updated_capabilities,
 }
 
 lsp.ocamllsp.setup{
-  on_attach = function(client)
-    custom_attach(client)
-    require'virtualtypes'.on_attach()
-  end
+  on_attach = custom_attach,
+  capabilities = updated_capabilities,
+  filetypes = { "ocaml", "ocaml_interface", "menhir" },
 }
 
 local configs = require("lspconfig.configs")
@@ -152,7 +165,25 @@ if not configs.isabelle then
 }
 end
 
+if not configs.cobol then
+  configs.cobol = {
+    default_config = {
+      cmd = {'/Users/emilienlemaire/Development/cobol/lsp/cobol-language-support'},
+      filetypes = {'cobol'},
+      root_dir = function(fname)
+        return lsp.util.find_git_ancestor(fname) or vim.fn.getcwd()
+      end,
+      settings = {}
+    }
+  }
+end
+
 lsp.isabelle.setup{
   on_attach = custom_attach,
-  capabilities = capabilities
+  capabilities = updated_capabilities,
+}
+
+lsp.cobol.setup {
+  on_attach = custom_attach,
+  capabilities = updated_capabilities,
 }
