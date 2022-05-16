@@ -5,7 +5,8 @@
   (au- :FileType
     [
       :ocaml
-      :ocaml.ocaml_interface
+      :ocaml_interface
+      :ocamllex
       :menhir
       :ocamlex
       :lua
@@ -26,9 +27,8 @@
     ":source ~/.opam/default/share/ocp-indent/vim/indent/ocaml.vim"))
 
 (local fts {
-    :md   "mkd"
     :yapl "yapl"
-    :mli  "ocaml.ocaml_interface"
+    :mli  "ocaml_interface"
     :mly  "menhir"
     :mll  "ocamllex"
     :lus  "lus"

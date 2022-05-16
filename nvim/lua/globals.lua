@@ -17,30 +17,16 @@ vim.g.dap_virtual_text = true
 -- }}
 
 -- {{
-vim.g.markdown_fenced_languages = {
+--[[ vim.g.markdown_fenced_languages = {
   'plsql', 'sql', 'python', 'lua', 'cpp', 'typescript', 'typescriptreact', 'javascript', 'javascriptreact'
-}
--- }}
-
--- {{ gruvbox
-vim.g.gruvbox_transparent_bg = true
-vim.g.gruvbox_improved_strings = true
-vim.g.gruvbox_constrast_dark = 'hard'
+} ]]
+vim.g.vim_markdown_folding_disabled = true
 -- }}
 
 -- {{ auto header
 vim.g.header_field_author = 'Emilien Lemaire'
 vim.g.header_field_author_email = 'emilien.lem@icloud.com'
 vim.g.header_auto_add_header = false
--- }}
-
--- {{{ space.nvim
-vim.g.space_vim_transp_bg = true
-vim.g.one_nvim_transparent_bg = true
--- }}}
-
--- {{
-vim.g.calvera_disable_background = true
 -- }}
 
 -- {{{ neoformat
@@ -64,14 +50,14 @@ vim.g.jupytext_style = 'hydrogen'
 -- }}}
 
 -- {{{ vimwiki
-vim.g.vimwiki_list = {
+--[[ vim.g.vimwiki_list = {
   {
     automatic_nested_syntax = true,
     template_path = "~/vimwiki_tpl",
     template_ext = ".tpl",
     template_default = "syntax-highlighted"
   }
-}
+} ]]
 -- }}}
 
 -- {{{ ripple

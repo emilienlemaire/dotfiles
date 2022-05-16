@@ -1,9 +1,16 @@
 local lsp = require('lspconfig')
-local nvim_status = require('lsp-status')
+-- local nvim_status = require('lsp-status')
 local utils = require('utils')
-local status = require('elem.lsp_status')
+-- local status = require('elem.lsp_status')
+-- status.activate()
 
-status.activate()
+vim.lsp.handlers["window/showMessage"] = require("elem.lsp.show_message")
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with (
+  vim.lsp.handlers.hover, {
+    border = "rounded",
+  }
+)
+require("elem.lsp.show_message")
 
 local custom_attach = function(client)
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -19,6 +26,13 @@ local custom_attach = function(client)
     buffer = true,
   }
 
+  local options_hover = {
+    noremap = true,
+    silent = true,
+    buffer = true,
+    desc = "lsp:hover",
+  }
+
   vim.keymap.set('n', '<c-]>', vim.lsp.buf.definition, options_buf)
   vim.keymap.set('n', 'gD', vim.lsp.buf.implementation, options_buf)
   vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, options_buf)
@@ -29,20 +43,22 @@ local custom_attach = function(client)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, options_buf)
   vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, options_buf)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, options_buf)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, options_buf)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, options_hover)
   utils.map_buf('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
-  utils.map_buf('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
+  if client.name == "clangd" then
+    utils.map_buf('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
+  end
 
-  status.on_attach(client)
+  -- status.on_attach(client)
 
-  if client.resolved_capabilities.code_lens then
+  if client.server_capabilities.code_lens then
     require'virtualtypes'.on_attach()
   end
   require "lsp_signature".on_attach()
 end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
-updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
+-- updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
 updated_capabilities.textDocument.completion.completionItem.snippetSupport = true
 updated_capabilities = require('cmp_nvim_lsp').update_capabilities(updated_capabilities)
 
@@ -59,7 +75,7 @@ lsp.clangd.setup({
     clangdFileStatus = true,
   },
   on_attach = custom_attach,
-  handlers = nvim_status.extensions.clangd.setup(),
+  -- handlers = nvim_status.extensions.clangd.setup(),
   capabilities = updated_capabilities,
 })
 
@@ -73,13 +89,8 @@ lsp.rust_analyzer.setup{
   capabilities = updated_capabilities,
 }
 
-local system_name = utils.get_system_name()
-
-local sumneko_root_path = "/Users/emilienlemaire/Development/lua/lua-language-server"
-local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
-
 lsp.sumneko_lua.setup {
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  cmd = {"lua-language-server"},
   settings = {
     Lua = {
       runtime = {
@@ -110,14 +121,14 @@ lsp.texlab.setup({
 })
 
 lsp.cmake.setup({
-  on_attach = function(client)
+  on_attach = function(_)
     require "lsp_signature".on_attach()
   end,
   capabilities = updated_capabilities,
 })
 
 require('nlua.lsp.nvim').setup(require('lspconfig'), {
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+  cmd = {"lua-language-server"},
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 
@@ -168,7 +179,7 @@ end
 if not configs.cobol then
   configs.cobol = {
     default_config = {
-      cmd = {'/Users/emilienlemaire/Development/cobol/lsp/cobol-language-support'},
+      cmd = {'/Users/emilienlemaire/Development/cobol/che-che4z-lsp-for-cobol/server/cobol-language-support'},
       filetypes = {'cobol'},
       root_dir = function(fname)
         return lsp.util.find_git_ancestor(fname) or vim.fn.getcwd()

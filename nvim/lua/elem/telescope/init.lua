@@ -16,6 +16,7 @@ reloader()
 
 local themes = require('telescope.themes')
 local trouble = require("trouble.providers.telescope")
+local multi_rg = require("elem.telescope.multi_rg")
 
 require('telescope').setup{
   defaults = {
@@ -77,6 +78,8 @@ function M.curbuf()
 
   require('telescope.builtin').current_buffer_fuzzy_find(opts)
 end
+
+vim.keymap.set('n', '<leader>fg', multi_rg, { noremap = true, silent = true })
 
 return setmetatable({}, {
   __index = function(_, k)

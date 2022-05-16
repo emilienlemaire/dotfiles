@@ -1,5 +1,3 @@
-local utils = require('utils')
-
 local options = {
   noremap = true,
   silent = true
@@ -19,13 +17,13 @@ vim.keymap.set('n', '<c-l>', ':wincmd l<cr>', options)
 --}}}
 
 --{{{ cmake
-vim.keymap.set('n', '<leader>b', ':CMakeBuild<cr>', options)
-vim.keymap.set('n', '<leader>g', ':CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=1 <cr>', options)
+vim.keymap.set('n', '<leader>cb', ':CMakeBuild<cr>', options)
+vim.keymap.set('n', '<leader>cg', ':CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=1 <cr>', options)
 --}}}
 
 -- {{{ diagnostics
-vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, options)
-vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, options)
+vim.keymap.set('n', '<leader>dn', function () vim.diagnostic.goto_next({float = {border = "rounded"}}) end, options)
+vim.keymap.set('n', '<leader>dp', function () vim.diagnostic.goto_prev({float = {border = "rounded"}}) end, options)
 -- }}}
 
 -- {{{ EasyAlign
@@ -34,7 +32,7 @@ vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
 -- }}}
 
 -- {{{ telescope
-vim.keymap.set('n', '<leader>sf', require'elem.telescope'.git_files, options)
+vim.keymap.set('n', '<leader>o', require'elem.telescope'.git_files, options)
 vim.keymap.set('n', '<leader>p', require'telescope.builtin'.find_files, options)
 vim.keymap.set('n', '<leader>rg', require'telescope.builtin'.live_grep, options)
 vim.keymap.set('n', '<leader>ls', require'telescope.builtin'.lsp_references, options)
@@ -43,7 +41,7 @@ vim.keymap.set('n', '<leader>ds', require'telescope.builtin'.lsp_document_symbol
 vim.keymap.set('n', '<leader>dg', require'telescope.builtin'.diagnostics, options)
 vim.keymap.set('n', '<leader>ld', require'telescope.builtin'.lsp_definitions, options)
 vim.keymap.set('n', '<leader>ec', require'elem.telescope'.edit_config, options)
-vim.keymap.set('n', '<leader>ff', require'elem.telescope'.curbuf, options)
+vim.keymap.set('n', '<leader>b', require'elem.telescope'.curbuf, options)
 -- }}}
 
 -- {{{ dap

@@ -4,9 +4,9 @@ local cmd = vim.cmd
 local w = vim.wo
 local b = vim.bo
 
-local utils = require('utils')
-
 local _ = require('bootstrap')
+
+local utils = require('utils')
 
 g.mapleader = ' '
 
@@ -64,7 +64,9 @@ o.completeopt = [[menuone,noselect]]
 o.ignorecase = true
 o.smartcase = true
 
-
+o.pumblend = 17
+o.wildmode = "longest:full"
+o.wildoptions = "pum"
 
 -- General mappings, not depending on any plugins
 vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<cr>gv=gv]], {noremap = true})
@@ -82,19 +84,27 @@ vim.api.nvim_set_keymap('n', '<Right>', [[:echoerr "Do not do that!!"<cr>]], {no
 
 vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', {noremap = true})
 
-local home = os.getenv('HOME')
-
 -- vim.api.nvim_set_var('python_host_prog', home .. '/opt/miniconda3/envs/conda2/bin/python')
 -- vim.api.nvim_set_var('python3_host_prog', home .. 'Users/emilienlemaire/mambaforge/envs/nvim/bin/python')
-vim.api.nvim_set_var('ruby_host_prog', '/opt/homebrew/lib/ruby/gems/3.0.0/gems/neovim-0.8.1/exe/neovim-ruby-host')
+vim.api.nvim_set_var('ruby_host_prog', '/opt/homebrew/lib/ruby/gems/3.1.0/bin/neovim-ruby-host')
 
-vim.api.nvim_set_var('opamshare', home .. '/.opam/default/share')
+local opamshare = vim.fn.system("opam var share"):gsub("\n", "")
+
+vim.api.nvim_set_var('opamshare', opamshare)
 
 vim.api.nvim_set_var('merlin_python_version', 3)
 
-utils.add_rtp(home .. '/.opam/default/share/merlin/vim/doc')
-utils.add_rtp(home .. '/.opam/default/share/merlin/vim')
-utils.add_rtp(home .. '/.opam/default/share/merlin/vimbufsync')
+utils.add_rtp(opamshare .. '/merlin/vim/doc')
+utils.add_rtp(opamshare .. '/merlin/vim')
+utils.add_rtp(opamshare .. '/merlin/vimbufsync')
+utils.add_rtp(opamshare .. '/ocp-index/vim')
+
+local gid = vim.api.nvim_create_augroup("ocpindent", {})
+
+vim.api.nvim_create_autocmd({"FileType ocaml,menhir,ocaml_interface,ocamllex"}, {
+  command = "source " .. opamshare .. "/ocp-indent/vim/indent/ocaml.vim",
+  group = gid,
+})
 
 -- REQUIRES
 require('plugins')
@@ -105,7 +115,7 @@ require("hotpot").setup({
         env = '_COMPILER'
     }
 })
-local ok, res = pcall(function() require('lsp_config') end)
+local ok, res = pcall(function() require('elem.lsp') end)
 
 if not ok then
   print("No LSP")
@@ -140,7 +150,7 @@ end
 
 RELOADER()
 
-cmd [[colorscheme catppuccin]]
-
-cmd  [[hi DiagnosticUnderlineError gui=undercurl guisp=Red]]
-cmd  [[hi DiagnosticUnderlineWarn gui=undercurl guisp=Orange]]
+require('newpaper').setup {
+  style = "dark",
+  -- disable_background = true,
+}

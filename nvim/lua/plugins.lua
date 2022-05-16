@@ -3,8 +3,8 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup({
   function(use)
 
-    use "~/Development/lua/cmake.nvim"
-    use "~/Development/tree-sitter/tree-sitter-menhir"
+    -- use "~/Development/lua/cmake.nvim"
+    use "emilienlemaire/tree-sitter-menhir"
 
     use {
       "cuducos/yaml.nvim",
@@ -13,9 +13,6 @@ return require('packer').startup({
         "nvim-treesitter/nvim-treesitter",
         "nvim-telescope/telescope.nvim" -- optional
       },
-      config = function ()
-        require("yaml_nvim").init()
-      end,
     }
 
     use {
@@ -32,7 +29,7 @@ return require('packer').startup({
       end,
     }
 
-    use '~/nvim-plugins/llvm-vim'
+    -- use '~/nvim-plugins/llvm-vim'
 
     use 'wbthomason/packer.nvim'
     --{{{ LSP
@@ -123,7 +120,7 @@ return require('packer').startup({
         }
       end
     }
-
+-- #2B2B2B
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
@@ -156,8 +153,6 @@ return require('packer').startup({
         'kana/vim-textobj-user'
       }
     }
-
-    use 'vimwiki/vimwiki'
 
     use {
       'nvim-neorg/neorg',
@@ -197,10 +192,13 @@ return require('packer').startup({
     -- {{{ LANGUAGES
 
     use 'ocaml/vim-ocaml'
-    use 'paulpatault/virtual-types.nvim'
+    use 'jubnzv/virtual-types.nvim'
     use 'ELLIOTTCABLE/vim-menhir'
     use 'cdelledonne/vim-cmake'
-    use 'tpope/vim-markdown'
+    -- use 'tpope/vim-markdown'
+    use 'godlygeek/tabular'
+    use 'preservim/vim-markdown'
+    use 'dhruvasagar/vim-table-mode'
 
     use 'tjdevries/nlua.nvim'
     use 'rafcamlet/nvim-luapad'
@@ -234,10 +232,14 @@ return require('packer').startup({
         as = 'catppuccin'
     }
 
-    use 'morhetz/gruvbox'
+    use 'yorik1984/newpaper.nvim'
 
-    use 'tjdevries/colorbuddy.vim'
-    use 'tjdevries/express_line.nvim'
+    use 'yorik1984/lualine-theme.nvim'
+    -- use 'tjdevries/express_line.nvim'
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
 
     use 'ryanoasis/vim-devicons'
 

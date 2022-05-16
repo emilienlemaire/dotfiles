@@ -1,7 +1,7 @@
 local catppuccin = require('catppuccin')
 
 catppuccin.setup({
-  transparent_background = true,
+  transparent_background = false,
   integrations = {
     treesitter = true,
     native_lsp = {
@@ -20,8 +20,13 @@ catppuccin.setup({
       },
     },
     lsp_trouble = true,
-    lsp_saga = true,
+    -- lsp_saga = true,
     gitsigns = true,
-    telescope = true
+    telescope = true,
+    indent_blankline = {
+      enabled = true,
+      colored_indent_level = false
+    },
+    neogit = true,
   }
 })
