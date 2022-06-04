@@ -60,80 +60,55 @@ require('nvim-treesitter.configs').setup {
       node_decremental = 'grm',  -- decrement to the previous node
     },
   },
-  refactor = {
-    highlight_definitions = {enable = true},
-    highlight_current_scope = {enable = false},
-    smart_rename = {
+
+  textobjects = {
+    select = {
       enable = true,
+      lookahead = true,
       keymaps = {
-        -- mapping to rename reference under cursor
-        smart_rename = 'grn',
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
       },
     },
 
-    -- TODO: This seems broken...
-    navigation = {
+    move = {
       enable = true,
-      keymaps = {
-        goto_definition = 'gnd', -- mapping to go to definition of symbol under cursor
-        list_definitions = 'gnD', -- mapping to list all definitions in current file
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]]"] = "@class.outer",
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer",
       },
     },
   },
-  textobjects = { -- syntax-aware textobjects
-    enable = true,
-    disable = {},
-    keymaps = {
-      ['iL'] = { -- you can define your own textobjects directly here
-        python = '(function_definition) @function',
-        cpp = '(function_definition) @function',
-        c = '(function_definition) @function',
-        java = '(method_declaration) @function',
-      },
-      -- or you use the queries from supported languages with textobjects.scm
-      ['af'] = '@function.outer',
-      ['if'] = '@function.inner',
-      ['aC'] = '@class.outer',
-      ['iC'] = '@class.inner',
-      ['ac'] = '@conditional.outer',
-      ['ic'] = '@conditional.inner',
-      ['ae'] = '@block.outer',
-      ['ie'] = '@block.inner',
-      ['al'] = '@loop.outer',
-      ['il'] = '@loop.inner',
-      ['is'] = '@statement.inner',
-      ['as'] = '@statement.outer',
-      ['ad'] = '@comment.outer',
-      ['am'] = '@call.outer',
-      ['im'] = '@call.inner',
-    },
-    indent = {
-      enable = false,
-    },
-   },
-   ensure_installed = {
-     'bash',
-     'c',
-     'cpp',
-     'css',
-     'html',
-     'javascript',
-     'json',
-     'jsonc',
-     'latex',
-     'lua',
-     'nix',
-     'ocaml',
-     'ocaml_interface',
-     'ocamllex',
-     'php',
-     'python',
-     'scss',
-     'toml',
-     'tsx',
-     'typescript',
-     'vue',
-     'yaml'
-   }
-   -- one of 'all', 'language', or a list of languages
+
+  ensure_installed = {
+    'bash',
+    'c',
+    'cpp',
+    'json',
+    'jsonc',
+    'latex',
+    'lua',
+    'ocaml',
+    'ocaml_interface',
+    'ocamllex',
+    'python',
+    'toml',
+    'yaml'
+  },
+-- one of 'all', 'language', or a list of languages
  }

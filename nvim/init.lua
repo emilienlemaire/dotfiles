@@ -58,7 +58,6 @@ if o.shell == 'fish$' then
   o.shell = [[/bin/bash]]
 end
 
-
 o.completeopt = [[menuone,noselect]]
 
 o.ignorecase = true
@@ -99,13 +98,6 @@ utils.add_rtp(opamshare .. '/merlin/vim')
 utils.add_rtp(opamshare .. '/merlin/vimbufsync')
 utils.add_rtp(opamshare .. '/ocp-index/vim')
 
-local gid = vim.api.nvim_create_augroup("ocpindent", {})
-
-vim.api.nvim_create_autocmd({"FileType ocaml,menhir,ocaml_interface,ocamllex"}, {
-  command = "source " .. opamshare .. "/ocp-indent/vim/indent/ocaml.vim",
-  group = gid,
-})
-
 -- REQUIRES
 require('plugins')
 require('zest').setup()
@@ -130,27 +122,28 @@ R = function(name)
   return require(name)
 end
 
-R('nvim-web-devicons').setup()
-R('gitsigns').setup()
 RELOADER = function()
+  R('nvim-web-devicons').setup()
+  R('gitsigns').setup()
   R("elem.autocmds")
-  R('elem.luasnip')
-  R('elem.nvim-cmp')
-  R('elem.treesitter')
-  R('elem.statusline')
-  R('elem.plenary')
-  R('elem.telescope')
-  R('elem.ripple')
-  -- R('elem.rust-tools')
-  R('mappings')
-  R('globals')
-  R('elem.catppuccino')
-  require("fidget").setup()
+  R("elem.luasnip")
+  R("elem.nvim-cmp")
+  R("elem.treesitter")
+  R("elem.statusline")
+  R("elem.plenary")
+  R("elem.telescope")
+  R("elem.ripple")
+  R("mappings")
+  R("globals")
+  R("elem.catppuccino")
+  R("fidget").setup()
+  R("elem.newpaper")
 end
 
 RELOADER()
 
-require('newpaper').setup {
-  style = "dark",
-  -- disable_background = true,
-}
+b.expandtab = true
+
+g.undodir = "~/.local/nvim/state"
+b.undofile = true
+

@@ -37,6 +37,12 @@ return require('packer').startup({
 
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/playground'
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use {
+      'vigoux/treesitter-context.nvim',
+      requires = { 'nvim-treesitter/nvim-treesitter' }
+    }
+
 
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'
@@ -51,7 +57,7 @@ return require('packer').startup({
 
     use 'wbthomason/lsp-status.nvim'
     use 'ray-x/lsp_signature.nvim'
-    -- use 'simrat39/rust-tools.nvim'
+    use 'simrat39/rust-tools.nvim'
     use 'mfussenegger/nvim-dap'
 
     use 'L3MON4D3/LuaSnip'
@@ -79,11 +85,6 @@ return require('packer').startup({
     }
 
     use {
-      'vigoux/treesitter-context.nvim',
-      requires = { 'nvim-treesitter/nvim-treesitter' }
-    }
-
-    use {
       'nvim-telescope/telescope.nvim',
       requires = {
         {'nvim-lua/popup.nvim'},
@@ -99,7 +100,7 @@ return require('packer').startup({
 
     use 'pbrisbin/vim-mkdir'
 
-    use 'mbbill/undotree'
+    use 'jiaoshijie/undotree'
     use {
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
@@ -120,7 +121,7 @@ return require('packer').startup({
         }
       end
     }
--- #2B2B2B
+
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
@@ -135,10 +136,7 @@ return require('packer').startup({
     -- use 'emilienlemaire/nvimux-navigator'
 
     use 'mhinz/vim-startify'
-    use {
-      'lervag/vimtex',
-      ft = {'tex'}
-    }
+    use { 'lervag/vimtex' }
 
     use 'lewis6991/gitsigns.nvim'
     use 'TimUntersberger/neogit'

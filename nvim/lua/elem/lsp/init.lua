@@ -1,8 +1,5 @@
-local lsp = require('lspconfig')
--- local nvim_status = require('lsp-status')
+local lspconfig = require('lspconfig')
 local utils = require('utils')
--- local status = require('elem.lsp_status')
--- status.activate()
 
 vim.lsp.handlers["window/showMessage"] = require("elem.lsp.show_message")
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with (
@@ -49,8 +46,6 @@ local custom_attach = function(client)
     utils.map_buf('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
   end
 
-  -- status.on_attach(client)
-
   if client.server_capabilities.code_lens then
     require'virtualtypes'.on_attach()
   end
@@ -58,11 +53,10 @@ local custom_attach = function(client)
 end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
--- updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
 updated_capabilities.textDocument.completion.completionItem.snippetSupport = true
 updated_capabilities = require('cmp_nvim_lsp').update_capabilities(updated_capabilities)
 
-lsp.clangd.setup({
+lspconfig.clangd.setup({
   cmd = {
     "clangd",
     "--background-index",
@@ -75,22 +69,22 @@ lsp.clangd.setup({
     clangdFileStatus = true,
   },
   on_attach = custom_attach,
-  -- handlers = nvim_status.extensions.clangd.setup(),
   capabilities = updated_capabilities,
 })
 
-lsp.vimls.setup({
+lspconfig.vimls.setup({
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 })
 
-lsp.rust_analyzer.setup{
+lspconfig.rust_analyzer.setup{
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 }
 
-lsp.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup {
   cmd = {"lua-language-server"},
+  on_attach = custom_attach,
   settings = {
     Lua = {
       runtime = {
@@ -115,12 +109,17 @@ lsp.sumneko_lua.setup {
   capabilities = updated_capabilities,
 }
 
-lsp.texlab.setup({
+lspconfig.ltex.setup({
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 })
 
-lsp.cmake.setup({
+lspconfig.texlab.setup({
+  on_attach = custom_attach,
+  capabilities = updated_capabilities,
+})
+
+lspconfig.cmake.setup({
   on_attach = function(_)
     require "lsp_signature".on_attach()
   end,
@@ -128,7 +127,6 @@ lsp.cmake.setup({
 })
 
 require('nlua.lsp.nvim').setup(require('lspconfig'), {
-  cmd = {"lua-language-server"},
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 
@@ -139,23 +137,23 @@ require('nlua.lsp.nvim').setup(require('lspconfig'), {
   }
 })
 
-lsp.html.setup {
+lspconfig.html.setup {
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 }
 
-lsp.jedi_language_server.setup({
+lspconfig.jedi_language_server.setup({
   on_attach = custom_attach,
   filetypes = { "python", "sage" },
   capabilities = updated_capabilities,
 })
 
-lsp.clojure_lsp.setup {
+lspconfig.clojure_lsp.setup {
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 }
 
-lsp.ocamllsp.setup{
+lspconfig.ocamllsp.setup{
   on_attach = custom_attach,
   capabilities = updated_capabilities,
   filetypes = { "ocaml", "ocaml_interface", "menhir" },
@@ -169,7 +167,7 @@ if not configs.isabelle then
         cmd = {'isabelle', 'vscode_server', '-v', '-L', '/tmp/isalsp.log', '-o', 'vscode_html_output=false'},
         filetypes = {'isabelle'},
         root_dir = function(fname)
-            return lsp.util.find_git_ancestor(fname) or vim.fn.getcwd()
+            return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
         end,
         settings = {}
   }
@@ -182,19 +180,19 @@ if not configs.cobol then
       cmd = {'/Users/emilienlemaire/Development/cobol/che-che4z-lsp-for-cobol/server/cobol-language-support'},
       filetypes = {'cobol'},
       root_dir = function(fname)
-        return lsp.util.find_git_ancestor(fname) or vim.fn.getcwd()
+        return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
       end,
       settings = {}
     }
   }
 end
 
-lsp.isabelle.setup{
+lspconfig.isabelle.setup{
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 }
 
-lsp.cobol.setup {
+lspconfig.cobol.setup {
   on_attach = custom_attach,
   capabilities = updated_capabilities,
 }
