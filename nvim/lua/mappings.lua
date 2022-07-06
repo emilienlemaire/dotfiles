@@ -14,6 +14,10 @@ vim.keymap.set('n', '<c-h>', ':wincmd h<cr>', options)
 vim.keymap.set('n', '<c-j>', ':wincmd j<cr>', options)
 vim.keymap.set('n', '<c-k>', ':wincmd k<cr>', options)
 vim.keymap.set('n', '<c-l>', ':wincmd l<cr>', options)
+vim.keymap.set('n', '<c-LEFT>', ':10winc ><cr>', options)
+vim.keymap.set('n', '<c-RIGHT>', ':10winc <<cr>', options)
+vim.keymap.set('n', '<c-UP>', ':2winc +<cr>', options)
+vim.keymap.set('n', '<c-DOWN>', ':2winc -<cr>', options)
 --}}}
 
 --{{{ cmake
@@ -66,4 +70,8 @@ vim.keymap.set('n', '<leader>td', '<cmd>TroubleToggle lsp_document_diagnostics<c
 
 -- {{{ toggleterm
 vim.keymap.set('n', '<leader>tg', function() require('toggleterm').toggle_command("size=80 direction=vertical", 0) end, options)
+-- }}}
+
+-- {{{ WinShift
+vim.keymap.set('n', '<c-w>m', ':WinShift<cr>', options)
 -- }}}

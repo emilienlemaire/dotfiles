@@ -19,7 +19,7 @@ for key, val in pairs(filetypes) do
     {"BufRead", "BufNewFile"},
     {
       group = "ft",
-      pattern = key,
+      pattern = "*." .. key,
       command = "setfiletype ".. val,
     }
   )
@@ -27,20 +27,25 @@ end
 
 vim.api.nvim_create_augroup("randomcmds", { clear = true})
 
+local ocaml_callback = function ()
+  vim.cmd [[unlet b:did_indent]]
+  vim.cmd ("source " .. opam_share .. "/ocp-indent/vim/indent/ocaml.vim")
+end
+
 vim.api.nvim_create_autocmd(
   "FileType",
   {
     group = "randomcmds",
     pattern = {
       "ocaml",
-      "ocaml.ocaml_interface",
       "ocaml_interface",
       "menhir",
       "ocamllex",
     },
-    command = "source " .. opam_share .. "/ocp-indent/vim/indent/ocaml.vim",
+    callback = ocaml_callback,
   }
 )
+
 
 local rs_callback = function ()
   local exts = require("lsp_extensions")
@@ -60,3 +65,22 @@ vim.api.nvim_create_autocmd(
     callback = rs_callback,
   }
 )
+
+vim.api.nvim_create_augroup("shiftwidth", { clear = true })
+
+local shift_ft = {
+    "ocaml",
+    "lua",
+    "ocaml_interface"
+}
+
+for _, ft in ipairs(shift_ft) do
+    vim.api.nvim_create_autocmd(
+      "FileType",
+      {
+        group = "shiftwidth",
+        pattern = ft,
+        command = "setlocal shiftwidth=2"
+      }
+    )
+end

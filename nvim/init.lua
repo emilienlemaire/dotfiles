@@ -1,71 +1,67 @@
-local g = vim.g
-local o = vim.o
-local cmd = vim.cmd
-local w = vim.wo
-local b = vim.bo
-
-local _ = require('bootstrap')
+-- local _ = require('ootstrap')init
 
 local utils = require('utils')
 
-g.mapleader = ' '
+vim.g.mapleader = ' '
+vim.o.autoindent = true
+vim.o.expandtab = true
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.smartindent = true
+vim.o.modeline = true
+vim.o.swapfile = false
+vim.o.undofile = true
 
-b.autoindent = true
-b.expandtab = true
-b.softtabstop = 4
-b.shiftwidth = 4
-b.tabstop = 4
-b.smartindent = true
-b.modeline = true
-b.swapfile = false
 
-o.backspace = [[indent,eol,start]]
-o.hidden = true
-w.winfixwidth = false
+vim.o.cmdheight = 1
+vim.o.backspace = [[indent,eol,start]]
+vim.o.hidden = true
+vim.o.winfixwidth = false
 
-o.lazyredraw = true
+vim.o.lazyredraw = true
 
-o.splitbelow = true
-o.splitright = true
+vim.o.splitbelow = true
+vim.o.splitright = true
 
-w.cursorline = true
-b.synmaxcol = 4000
+vim.o.cursorline = true
+vim.o.synmaxcol = 4000
 
-w.number = true
-w.relativenumber = true
+vim.o.number = true
+vim.o.relativenumber = true
 
-w.list = true
+vim.o.list = true
 if vim.fn.has('multi_byte') == 1 and vim.o.encoding == 'utf-8' then
-  o.listchars = [[tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:…]]
+  vim.o.listchars = [[tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:…]]
 else
-  o.listchars = [[tab:> ,extends:>,precedes:<,nbsp:.,trail:_]]
+  vim.o.listchars = [[tab:> ,extends:>,precedes:<,nbsp:.,trail:_]]
 end
 
-w.colorcolumn = [[100]]
-w.wrap = false
+vim.o.colorcolumn = [[100]]
+vim.o.wrap = false
 
-o.termguicolors = true
+vim.o.termguicolors = true
 
-o.clipboard = [[unnamed,unnamedplus]]
+vim.o.clipboard = [[unnamed,unnamedplus]]
 
-o.scrolloff = 4
+vim.o.scrolloff = 4
 
-o.timeoutlen = 300
+vim.o.timeoutlen = 400
 
-o.mouse = 'a'
+vim.o.mouse = 'a'
 
-if o.shell == 'fish$' then
-  o.shell = [[/bin/bash]]
+if vim.o.shell == 'fish$' then
+  vim.o.shell = [[/bin/bash]]
 end
 
-o.completeopt = [[menuone,noselect]]
+vim.o.completeopt = [[menuone,noselect]]
 
-o.ignorecase = true
-o.smartcase = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
-o.pumblend = 17
-o.wildmode = "longest:full"
-o.wildoptions = "pum"
+vim.o.pumblend = 17
+vim.o.wildmode = "longest:full"
+vim.o.wildoptions = "pum"
 
 -- General mappings, not depending on any plugins
 vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<cr>gv=gv]], {noremap = true})
@@ -83,7 +79,7 @@ vim.api.nvim_set_keymap('n', '<Right>', [[:echoerr "Do not do that!!"<cr>]], {no
 
 vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', {noremap = true})
 
--- vim.api.nvim_set_var('python_host_prog', home .. '/opt/miniconda3/envs/conda2/bin/python')
+-- vim.api.nvim_set_var('python_host_prog', home .. '/o/miniconda3/envs/conda2/bin/python')
 -- vim.api.nvim_set_var('python3_host_prog', home .. 'Users/emilienlemaire/mambaforge/envs/nvim/bin/python')
 vim.api.nvim_set_var('ruby_host_prog', '/opt/homebrew/lib/ruby/gems/3.1.0/bin/neovim-ruby-host')
 
@@ -100,13 +96,7 @@ utils.add_rtp(opamshare .. '/ocp-index/vim')
 
 -- REQUIRES
 require('plugins')
-require('zest').setup()
-require("hotpot").setup({
-    modules = {'zest'},
-    macros = {
-        env = '_COMPILER'
-    }
-})
+
 local ok, res = pcall(function() require('elem.lsp') end)
 
 if not ok then
@@ -122,28 +112,6 @@ R = function(name)
   return require(name)
 end
 
-RELOADER = function()
-  R('nvim-web-devicons').setup()
-  R('gitsigns').setup()
-  R("elem.autocmds")
-  R("elem.luasnip")
-  R("elem.nvim-cmp")
-  R("elem.treesitter")
-  R("elem.statusline")
-  R("elem.plenary")
-  R("elem.telescope")
-  R("elem.ripple")
-  R("mappings")
-  R("globals")
-  R("elem.catppuccino")
-  R("fidget").setup()
-  R("elem.newpaper")
-end
-
-RELOADER()
-
-b.expandtab = true
-
-g.undodir = "~/.local/nvim/state"
-b.undofile = true
-
+R("mappings")
+R("globals")
+R("elem")
