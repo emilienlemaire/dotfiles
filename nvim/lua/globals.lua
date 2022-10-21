@@ -49,6 +49,10 @@ vim.g.neoformat_enabled_ocaml = {'ocamlformat'}
 vim.g.jupytext_fmt = 'py'
 vim.g.jupytext_style = 'hydrogen'
 -- }}}
+--
+-- {{{ coqtail
+vim.g.coqtail_noimap = 1
+-- }}}
 
 -- {{{ vimwiki
 --[[ vim.g.vimwiki_list = {

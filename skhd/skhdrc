@@ -168,4 +168,5 @@ ctrl + alt - s : yabai -m space --layout $(yabai -m query --spaces --space | jq 
 
 .blacklist [
     "qemu-system-x86_64"
+    "Shadow"
 ]

@@ -46,6 +46,8 @@ vim.keymap.set('n', '<leader>dg', require'telescope.builtin'.diagnostics, option
 vim.keymap.set('n', '<leader>ld', require'telescope.builtin'.lsp_definitions, options)
 vim.keymap.set('n', '<leader>ec', require'elem.telescope'.edit_config, options)
 vim.keymap.set('n', '<leader>b', require'elem.telescope'.curbuf, options)
+vim.keymap.set('n', '<leader>fg', require'elem.telescope'.multi_rg, options)
+vim.keymap.set('n', '<leader>fb', require'telescope'.extensions.file_browser.file_browser, options)
 -- }}}
 
 -- {{{ dap
@@ -64,8 +66,8 @@ vim.keymap.set('n', ']x', "yrih", {silent = true})
 
 -- {{{ lsptrouble
 vim.keymap.set('n', '<leader>tt', '<cmd>TroubleToggle<cr>', options)
-vim.keymap.set('n', '<leader>tw', '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>', options)
-vim.keymap.set('n', '<leader>td', '<cmd>TroubleToggle lsp_document_diagnostics<cr>', options)
+vim.keymap.set('n', '<leader>tw', '<cmd>TroubleToggle workspace_diagnostics<cr>', options)
+vim.keymap.set('n', '<leader>td', '<cmd>TroubleToggle document_diagnostics<cr>', options)
 -- }}}
 
 -- {{{ toggleterm

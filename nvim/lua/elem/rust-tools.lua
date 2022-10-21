@@ -1,5 +1,5 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local custom_attach = function(client)
@@ -35,6 +35,7 @@ local custom_attach = function(client)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, options_buf)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, options_hover)
   utils.map_buf('v', '<leader>ca', [[<cmd>'<,'>lua vim.lsp.buf.range_code_action()<cr>]], options)
+  vim.keymap.set('n', '<leader>ha', [[<cmd>RustHoverActions<cr>]], options_buf)
   if client.name == "clangd" then
     utils.map_buf('n', '<leader>sh', ':ClangdSwitchSourceHeader<cr>', options)
   end
@@ -48,7 +49,6 @@ end
 local opts = {
   tools = {
     autoSetHints = true,
-    hover_with_actions = true,
     inlay_hints = {
       show_parameter_hint = false,
       parameter_hints_prefix = "",

@@ -9,23 +9,26 @@ vim.api.nvim_command('packadd packer.nvim')
 
 local no_errors, error_msg = pcall(function()
 
-  local time
-  local profile_info
-  local should_profile = false
-  if should_profile then
-    local hrtime = vim.loop.hrtime
-    profile_info = {}
-    time = function(chunk, start)
-      if start then
-        profile_info[chunk] = hrtime()
-      else
-        profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
-      end
+_G._packer = _G._packer or {}
+_G._packer.inside_compile = true
+
+local time
+local profile_info
+local should_profile = false
+if should_profile then
+  local hrtime = vim.loop.hrtime
+  profile_info = {}
+  time = function(chunk, start)
+    if start then
+      profile_info[chunk] = hrtime()
+    else
+      profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
     end
-  else
-    time = function(chunk, start) end
   end
-  
+else
+  time = function(chunk, start) end
+end
+
 local function save_profiles(threshold)
   local sorted_times = {}
   for chunk_name, time_taken in pairs(profile_info) do
@@ -38,8 +41,10 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
-  _G._packer = _G._packer or {}
   _G._packer.profile_output = results
 end
 
@@ -84,6 +89,11 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  Coqtail = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/Coqtail",
+    url = "https://github.com/whonore/Coqtail"
+  },
   LuaSnip = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -98,6 +108,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
+  },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
   },
   ["cmp-latex-symbols"] = {
     loaded = true,
@@ -139,6 +154,16 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/colorizer",
     url = "https://github.com/lilydjwg/colorizer"
   },
+  ["coq.vim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/coq.vim",
+    url = "https://github.com/jvoorhis/coq.vim"
+  },
+  ["coqorico.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/coqorico.nvim",
+    url = "/Users/emilienlemaire/Development/plugins/coqorico.nvim"
+  },
   ["diffview.nvim"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/diffview.nvim",
@@ -148,6 +173,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/dressing.nvim",
     url = "https://github.com/stevearc/dressing.nvim"
+  },
+  edge = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/edge",
+    url = "https://github.com/sainnhe/edge"
   },
   ["fidget.nvim"] = {
     loaded = true,
@@ -225,6 +255,11 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nlua.nvim",
     url = "https://github.com/tjdevries/nlua.nvim"
   },
+  ["nvim-agda"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-agda",
+    url = "https://github.com/ashinkarov/nvim-agda"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -260,6 +295,11 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
+  },
   ["nvim-treesitter-textobjects"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
@@ -269,6 +309,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["ocaml-ts-queries.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/ocaml-ts-queries.nvim",
+    url = "/Users/emilienlemaire/Development/plugins/ocaml-ts-queries.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -300,6 +345,11 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
   },
+  ["sqlite.lua"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/sqlite.lua",
+    url = "https://github.com/tami5/sqlite.lua"
+  },
   tabular = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/tabular",
@@ -310,20 +360,31 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/targets.vim",
     url = "https://github.com/wellle/targets.vim"
   },
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+  },
+  ["telescope-frecency.nvim"] = {
+    config = { "\27LJ\2\nM\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\rfrecency\19load_extension\14telescope\frequire\0" },
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope-frecency.nvim",
+    url = "https://github.com/nvim-telescope/telescope-frecency.nvim"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
-  ["telescope-fzy-native.nvim"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
-    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
-  },
   ["telescope-luasnip.nvim"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope-luasnip.nvim",
     url = "https://github.com/benfowler/telescope-luasnip.nvim"
+  },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -380,11 +441,6 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-mkdir",
     url = "https://github.com/pbrisbin/vim-mkdir"
   },
-  ["vim-ocaml"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-ocaml",
-    url = "https://github.com/ocaml/vim-ocaml"
-  },
   ["vim-ripple"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-ripple",
@@ -394,6 +450,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-sandwich",
     url = "https://github.com/machakann/vim-sandwich"
+  },
+  ["vim-smt2"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/vim-smt2",
+    url = "https://github.com/bohlender/vim-smt2"
   },
   ["vim-startify"] = {
     loaded = true,
@@ -440,6 +501,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: telescope-frecency.nvim
+time([[Config for telescope-frecency.nvim]], true)
+try_loadstring("\27LJ\2\nM\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\rfrecency\19load_extension\14telescope\frequire\0", "config", "telescope-frecency.nvim")
+time([[Config for telescope-frecency.nvim]], false)
 -- Config for: indent-blankline.nvim
 time([[Config for indent-blankline.nvim]], true)
 try_loadstring("\27LJ\2\nq\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\20buftype_exclude\1\2\0\0\rterminal\1\0\1\tchar\6|\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
@@ -451,6 +516,13 @@ time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType yaml ++once lua require("packer.load")({'yaml.nvim'}, { ft = "yaml" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
+
+_G._packer.inside_compile = false
+if _G._packer.needs_bufread == true then
+  vim.cmd("doautocmd BufRead")
+end
+_G._packer.needs_bufread = false
+
 if should_profile then save_profiles() end
 
 end)

@@ -1,4 +1,6 @@
 -- local _ = require('ootstrap')init
+-- vim.g.do_filetype_lua = 1
+-- vim.g.did_load_filetypes = 0
 
 local utils = require('utils')
 
@@ -12,7 +14,6 @@ vim.o.smartindent = true
 vim.o.modeline = true
 vim.o.swapfile = false
 vim.o.undofile = true
-
 
 vim.o.cmdheight = 1
 vim.o.backspace = [[indent,eol,start]]
@@ -54,7 +55,7 @@ if vim.o.shell == 'fish$' then
   vim.o.shell = [[/bin/bash]]
 end
 
-vim.o.completeopt = [[menuone,noselect]]
+vim.o.completeopt = [[menu,menuone,noselect]]
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -115,3 +116,7 @@ end
 R("mappings")
 R("globals")
 R("elem")
+
+vim.cmd [[colorscheme catppuccin]]
+
+vim.cmd [[highlight CoqtailChecked gui=underline cterm=underline guisp=LightGreen]]

@@ -1,3 +1,14 @@
 {
-    "coc-isabelle.enabled": true
+    "languageserver": {
+        "cobol": {
+            "command": "mono /Users/emilienlemaire/Development/ocamlpro/TypeCobol/bin/Debug/TypeCobol.LanguageServer.exe",
+            "args": [
+                "-l 1",
+                "-lf /Users/emilienlemaire/.local/state/TypeCobol/lsp.log",
+                "--robot"
+            ],
+            "trace.server": "verbose",
+            "filetypes": ["cobol"]
+        }
+    }
 }

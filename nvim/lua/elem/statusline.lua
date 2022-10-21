@@ -38,7 +38,7 @@ local config = {
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
-    theme = "newpaper-dark",
+    theme = "catppuccin",
   },
   sections = {
     -- these are to remove the defaults
@@ -125,6 +125,7 @@ ins_left {
 
 ins_left {
   'filename',
+  path = 1,
   cond = conditions.buffer_not_empty,
   color = { fg = colors.magenta, gui = 'bold' },
 }
@@ -180,6 +181,10 @@ ins_left {
 }
 
 -- Add components to right sections
+ins_right {
+  'filetype',
+  color = { fg = colors.cyan, gui = 'bold' }
+}
 ins_right {
   'o:encoding', -- option component same as &encoding in viml
   fmt = string.upper, -- I'm not sure why it's upper case either ;)

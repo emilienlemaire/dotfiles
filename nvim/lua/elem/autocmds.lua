@@ -1,35 +1,13 @@
-local filetypes = {
-  yapl = "yapl",
-  mli =  "ocaml_interface",
-  mly =  "menhir",
-  mll =  "ocamllex",
-  lus =  "lus",
-  mls =  "lus",
-  imp =  "imp",
-  rml =  "rml",
-  thy =  "isabelle",
-}
-
 local opam_share = os.getenv("OPAM_SWITCH_PREFIX") .. "/share"
-
-vim.api.nvim_create_augroup("ft", { clear = true })
-
-for key, val in pairs(filetypes) do
-  vim.api.nvim_create_autocmd(
-    {"BufRead", "BufNewFile"},
-    {
-      group = "ft",
-      pattern = "*." .. key,
-      command = "setfiletype ".. val,
-    }
-  )
-end
 
 vim.api.nvim_create_augroup("randomcmds", { clear = true})
 
 local ocaml_callback = function ()
-  vim.cmd [[unlet b:did_indent]]
+  if vim.opt_local.filetype:get() == "ocaml" then
+    vim.cmd [[unlet b:did_indent]]
+  end
   vim.cmd ("source " .. opam_share .. "/ocp-indent/vim/indent/ocaml.vim")
+  vim.opt.iskeyword:append("_")
 end
 
 vim.api.nvim_create_autocmd(
@@ -39,8 +17,6 @@ vim.api.nvim_create_autocmd(
     pattern = {
       "ocaml",
       "ocaml_interface",
-      "menhir",
-      "ocamllex",
     },
     callback = ocaml_callback,
   }
@@ -48,13 +24,13 @@ vim.api.nvim_create_autocmd(
 
 
 local rs_callback = function ()
+  require('elem.rust-tools')
   local exts = require("lsp_extensions")
   exts.inlay_hints({
     prefix = ' » ',
     highlight = 'NonText',
     enabled = {'ChainingHint', 'TypeHint'}
   })
-  require('elem.rust-tools')
 end
 
 vim.api.nvim_create_autocmd(
@@ -71,7 +47,8 @@ vim.api.nvim_create_augroup("shiftwidth", { clear = true })
 local shift_ft = {
     "ocaml",
     "lua",
-    "ocaml_interface"
+    "ocaml_interface",
+    "ocamllex",
 }
 
 for _, ft in ipairs(shift_ft) do
@@ -84,3 +61,14 @@ for _, ft in ipairs(shift_ft) do
       }
     )
 end
+
+vim.api.nvim_create_autocmd(
+  "BufWritePre",
+  {
+    group = "randomcmds",
+    pattern = "*.rs",
+    callback = function ()
+      vim.lsp.buf.format()
+    end
+  }
+)

@@ -1,17 +1,26 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup({
-  function(use)
+  function(use, use_rocks)
 
-    -- use "~/Development/lua/cmake.nvim"
+    use "~/Development/plugins/ocaml-ts-queries.nvim"
+    use {
+      "~/Development/plugins/coqorico.nvim",
+      rocks = {'xmlua'}
+    }
+
+    use_rocks {"xmlua"}
+
     use 'wbthomason/packer.nvim'
 
     --{{{ LSP
+    -- use { 'neoclide/coc.nvim', run = 'yarn install --frozen-lockfile' }
     use 'neovim/nvim-lspconfig'
 
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/playground'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'
@@ -19,9 +28,10 @@ return require('packer').startup({
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lsp-document-symbol'
+    use 'hrsh7th/cmp-cmdline'
     use 'saadparwaiz1/cmp_luasnip'
     use 'kdheepak/cmp-latex-symbols'
-    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+    use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
 
     use 'ray-x/lsp_signature.nvim'
 
@@ -36,6 +46,7 @@ return require('packer').startup({
     use 'j-hui/fidget.nvim'
 
     use 'jubnzv/virtual-types.nvim'
+
     --}}}
 
     --{{{ UTILS
@@ -46,13 +57,21 @@ return require('packer').startup({
     use {
       'nvim-telescope/telescope.nvim',
       requires = {
-        {'nvim-lua/popup.nvim'},
-        {'nvim-lua/plenary.nvim'}
+        { 'nvim-lua/popup.nvim' },
+        { 'nvim-lua/plenary.nvim' }
       }
     }
 
-    use 'nvim-telescope/telescope-fzy-native.nvim'
-    use {'nvim-telescope/telescope-fzf-native.nvim', run='make'}
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use {
+      "nvim-telescope/telescope-frecency.nvim",
+      config = function()
+        require"telescope".load_extension("frecency")
+      end,
+      requires = {"tami5/sqlite.lua"}
+    }
+    use 'nvim-telescope/telescope-file-browser.nvim'
+    use 'nvim-telescope/telescope-ui-select.nvim'
 
     use 'stevearc/dressing.nvim'
 
@@ -92,7 +111,6 @@ return require('packer').startup({
       }
     }
 
-    -- use 'b3nj5m1n/kommentary'
     use 'numToStr/Comment.nvim'
 
     use 'kevinhwang91/nvim-hlslens'
@@ -104,7 +122,11 @@ return require('packer').startup({
 
     -- {{{ LANGUAGES
 
-    use 'ocaml/vim-ocaml'
+    -- use 'ocaml/vim-ocaml'
+    use 'jvoorhis/coq.vim'
+    use 'bohlender/vim-smt2'
+    use 'ashinkarov/nvim-agda'
+    use 'whonore/Coqtail'
 
     use 'ELLIOTTCABLE/vim-menhir'
     use 'Shatur/neovim-cmake'
@@ -126,7 +148,7 @@ return require('packer').startup({
 
     use {
       "cuducos/yaml.nvim",
-      ft = {"yaml"}, -- optional
+      ft = { "yaml" }, -- optional
       requires = {
         "nvim-treesitter/nvim-treesitter",
         "nvim-telescope/telescope.nvim" -- optional
@@ -137,12 +159,13 @@ return require('packer').startup({
 
     -- {{{ COLORSCHEMES
     use {
-        'catppuccin/nvim',
-        as = 'catppuccin'
+      'catppuccin/nvim',
+      as = 'catppuccin'
     }
 
     use 'yorik1984/newpaper.nvim'
     use 'Shatur/neovim-ayu'
+    use 'sainnhe/edge'
 
     use 'yorik1984/lualine-theme.nvim'
 
@@ -158,9 +181,9 @@ return require('packer').startup({
     use {
       'lukas-reineke/indent-blankline.nvim',
       config = function()
-        require('indent_blankline').setup{
+        require('indent_blankline').setup {
           char = "|",
-          buftype_exclude = {'terminal'}
+          buftype_exclude = { 'terminal' }
         }
       end
     }
@@ -169,7 +192,7 @@ return require('packer').startup({
 
     -- }}}
   end,
-  config =  {
+  config = {
     max_jobs = 50, -- Noticed it bugged with more than 70 plugins
     display = {
       _open_fn = function(name)
@@ -195,7 +218,3 @@ return require('packer').startup({
     },
   }
 })
-
-
-
-

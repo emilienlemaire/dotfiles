@@ -6,22 +6,22 @@ vim.opt.completeopt = {"menu", "menuone", "noselect"}
 lspkind.init()
 
 cmp.setup {
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ["<C-y>"] = cmp.mapping.confirm {
+  mapping = cmp.mapping.preset.insert({
+    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ["<C-y>"] = cmp.mapping(cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
-    },
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<C-q>'] = cmp.mapping.confirm{
+    }, { 'i', 'c' }),
+    ['<C-e>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
+    ['<C-q>'] = cmp.mapping(cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    }
-  },
-  sources = {
+    }, { 'i', 'c' })
+  }),
+  sources = cmp.config.sources({
     { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "cmp_tabnine" },
@@ -29,8 +29,9 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "latex_symbols" },
     { name = "neorg" },
-    { name = "buffer" },
-  },
+  }, {
+    { name = 'buffer' },
+  }),
   formatting = {
     format = function(entry, vim_item)
       -- fancy icons and a name of kind
@@ -66,6 +67,31 @@ cmp.setup {
   },
   experimental = {
     native_menu = false,
-    ghost_text = true,
+    ghost_text = false,
   }
 }
+cmp.setup.filetype('markdown',
+  {
+    sources = cmp.config.sources(
+    {
+      { name = 'latex_symbols' },
+    }
+    )
+  }
+)
+
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
+  }
+})
+
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources(
+  {
+    { name = 'path' },
+  },
+  {
+    { name = 'cmdline' },
+  })
+})
