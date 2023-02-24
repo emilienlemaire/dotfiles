@@ -77,3 +77,23 @@ vim.keymap.set('n', '<leader>tg', function() require('toggleterm').toggle_comman
 -- {{{ WinShift
 vim.keymap.set('n', '<c-w>m', ':WinShift<cr>', options)
 -- }}}
+-- {{{ ssr
+vim.keymap.set({ "n", "x" }, "<leader>sr", function() require("ssr").open() end)
+-- }}}
+-- {{{ harpoon
+vim.keymap.set('n', '<leader>ha', function() require('harpoon.mark').add_file() end, options)
+vim.keymap.set('n', '<leader>hg', "<cmd>Telescope harpoon marks<cr>", options)
+-- }}}
+-- {{{ Noice
+vim.keymap.set({"n", "i", "s"}, "<c-f>", function()
+  if not require("noice.lsp").scroll(4) then
+    return "<c-f>"
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({"n", "i", "s"}, "<c-b>", function()
+  if not require("noice.lsp").scroll(-4) then
+    return "<c-b>"
+  end
+end, { silent = true, expr = true })
+-- }}}}

@@ -52,7 +52,6 @@ local custom_attach = function(client)
   if client.server_capabilities.code_lens then
     require'virtualtypes'.on_attach()
   end
-  require "lsp_signature".on_attach()
 end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -63,10 +62,9 @@ lspconfig.clangd.setup({
   cmd = {
     "clangd",
     "--background-index",
-    "--suggest-missing-includes",
     "--clang-tidy",
     "--header-insertion=iwyu",
-    "--cross-file-rename"
+    "--"
   },
   init_options = {
     clangdFileStatus = true,
@@ -80,7 +78,9 @@ lspconfig.vimls.setup({
   capabilities = updated_capabilities,
 })
 
-lspconfig.sumneko_lua.setup {
+require('neodev').setup {}
+
+lspconfig.lua_ls.setup {
   on_attach = custom_attach,
   capabilities = updated_capabilities,
   root_dir = function(fname)
@@ -99,6 +99,9 @@ lspconfig.sumneko_lua.setup {
       },
       telemetry = {
         enabled = false,
+      },
+      completion = {
+        callSnippet = "Replace",
       },
     },
   },
@@ -126,17 +129,6 @@ lspconfig.cmake.setup({
   capabilities = updated_capabilities,
 })
 
-require('nlua.lsp.nvim').setup(require('lspconfig'), {
-  on_attach = custom_attach,
-  capabilities = updated_capabilities,
-
-  -- Include globals you want to tell the LSP are real :)
-  globals = {
-    -- Colorbuddy
-    "Color", "c", "Group", "g", "s",
-  }
-})
-
 lspconfig.html.setup {
   on_attach = custom_attach,
   capabilities = updated_capabilities,
@@ -157,6 +149,11 @@ lspconfig.ocamllsp.setup{
   on_attach = custom_attach,
   capabilities = updated_capabilities,
   filetypes = { "ocaml", "ocaml_interface", "menhir", "ocamllex" },
+}
+
+lspconfig.bashls.setup{
+  on_attach = custom_attach,
+  capabilities = updated_capabilities,
 }
 
 require'lspconfig'.hls.setup{

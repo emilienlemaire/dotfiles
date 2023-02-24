@@ -72,6 +72,8 @@ require('nvim-treesitter.configs').setup {
         ["ic"] = "@class.inner",
         ["il"] = "@let.inner",
         ["al"] = "@let.outer",
+        ["iP"] = "@begin.inner",
+        ["aP"] = "@begin.outer",
       },
     },
 

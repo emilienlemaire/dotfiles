@@ -24,12 +24,14 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = "luasnip" },
     { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
     { name = "cmp_tabnine" },
     { name = "path" },
     { name = "nvim_lua" },
     { name = "latex_symbols" },
     { name = "neorg" },
-  }, {
+  },
+  {
     { name = 'buffer' },
   }),
   formatting = {
@@ -82,7 +84,7 @@ cmp.setup.filetype('markdown',
 
 cmp.setup.cmdline('/', {
   sources = {
-    { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
+    { name = 'buffer', option = { keyword_pattern = [=[[^[:blank:]].*]=] } }
   }
 })
 

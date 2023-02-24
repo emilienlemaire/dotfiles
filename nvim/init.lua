@@ -20,7 +20,7 @@ vim.o.backspace = [[indent,eol,start]]
 vim.o.hidden = true
 vim.o.winfixwidth = false
 
-vim.o.lazyredraw = true
+-- vim.o.lazyredraw = true
 
 vim.o.splitbelow = true
 vim.o.splitright = true

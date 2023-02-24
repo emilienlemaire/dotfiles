@@ -1,9 +1,8 @@
 local catppuccin = require('catppuccin')
 local mocha = require('catppuccin.palettes').get_palette('mocha')
 
-vim.g.catppuccin_flavour = "mocha"
-
-catppuccin.setup({
+catppuccin.setup{
+  flavour = "mocha",
   compile = {
     enabled = true,
     path = vim.fn.stdpath "cache" .. "/catppuccin"
@@ -41,4 +40,4 @@ catppuccin.setup({
       TSNamespace = { fg = mocha.yellow, }
     },
   },
-})
+}

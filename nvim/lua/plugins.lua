@@ -28,12 +28,13 @@ return require('packer').startup({
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lsp-document-symbol'
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-cmdline'
     use 'saadparwaiz1/cmp_luasnip'
     use 'kdheepak/cmp-latex-symbols'
     use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
 
-    use 'ray-x/lsp_signature.nvim'
+    -- use 'ray-x/lsp_signature.nvim'
 
     use 'mfussenegger/nvim-dap'
 
@@ -50,7 +51,16 @@ return require('packer').startup({
     --}}}
 
     --{{{ UTILS
-    use 'rcarriga/nvim-notify'
+    use 'ThePrimeagen/harpoon'
+    use 'mbbill/undotree'
+    use {
+      'folke/noice.nvim',
+      requires = {
+        'MunifTanjim/nui.nvim',
+        'rcarriga/nvim-notify',
+      },
+    }
+
 
     use 'wellle/targets.vim'
 
@@ -80,8 +90,6 @@ return require('packer').startup({
     use 'junegunn/vim-easy-align'
 
     use 'pbrisbin/vim-mkdir'
-
-    use 'jiaoshijie/undotree'
 
     use {
       "folke/todo-comments.nvim",
@@ -113,11 +121,27 @@ return require('packer').startup({
 
     use 'numToStr/Comment.nvim'
 
-    use 'kevinhwang91/nvim-hlslens'
+    -- use 'kevinhwang91/nvim-hlslens'
 
-    use 'akinsho/toggleterm.nvim'
 
     use 'godlygeek/tabular'
+    use {
+      "cshuaimin/ssr.nvim",
+      module = "ssr",
+      -- Calling setup is optional.
+      config = function()
+        require("ssr").setup {
+          min_width = 50,
+          min_height = 5,
+          keymaps = {
+            close = "q",
+            next_match = "n",
+            prev_match = "N",
+            replace_all = "<leader><cr>",
+          },
+        }
+      end
+    }
     --}}}
 
     -- {{{ LANGUAGES
@@ -134,7 +158,7 @@ return require('packer').startup({
     use 'dhruvasagar/vim-table-mode'
 
     use 'simrat39/rust-tools.nvim'
-    use 'tjdevries/nlua.nvim'
+    use 'folke/neodev.nvim'
     use 'rafcamlet/nvim-luapad'
     use 'euclidianAce/BetterLua.vim'
 

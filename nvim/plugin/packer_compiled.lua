@@ -129,6 +129,11 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp-document-symbol",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp-document-symbol"
   },
+  ["cmp-nvim-lsp-signature-help"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp-signature-help",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help"
+  },
   ["cmp-nvim-lua"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
@@ -194,6 +199,11 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  harpoon = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
+  },
   ["indent-blankline.nvim"] = {
     config = { "\27LJ\2\nq\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\20buftype_exclude\1\2\0\0\rterminal\1\0\1\tchar\6|\nsetup\21indent_blankline\frequire\0" },
     loaded = true,
@@ -210,11 +220,6 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/lsp_extensions.nvim",
     url = "https://github.com/nvim-lua/lsp_extensions.nvim"
   },
-  ["lsp_signature.nvim"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
-    url = "https://github.com/ray-x/lsp_signature.nvim"
-  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
@@ -229,6 +234,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["neodev.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+    url = "https://github.com/folke/neodev.nvim"
   },
   neogit = {
     loaded = true,
@@ -250,10 +260,15 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/newpaper.nvim",
     url = "https://github.com/yorik1984/newpaper.nvim"
   },
-  ["nlua.nvim"] = {
+  ["noice.nvim"] = {
     loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nlua.nvim",
-    url = "https://github.com/tjdevries/nlua.nvim"
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/noice.nvim",
+    url = "https://github.com/folke/noice.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-agda"] = {
     loaded = true,
@@ -269,11 +284,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
-  },
-  ["nvim-hlslens"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/nvim-hlslens",
-    url = "https://github.com/kevinhwang91/nvim-hlslens"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -350,6 +360,14 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/sqlite.lua",
     url = "https://github.com/tami5/sqlite.lua"
   },
+  ["ssr.nvim"] = {
+    config = { "\27LJ\2\nü\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\4\15next_match\6n\16replace_all\17<leader><cr>\nclose\6q\15prev_match\6N\1\0\2\15min_height\3\5\14min_width\0032\nsetup\bssr\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/opt/ssr.nvim",
+    url = "https://github.com/cshuaimin/ssr.nvim"
+  },
   tabular = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/tabular",
@@ -396,11 +414,6 @@ _G.packer_plugins = {
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
   },
-  ["toggleterm.nvim"] = {
-    loaded = true,
-    path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
-    url = "https://github.com/akinsho/toggleterm.nvim"
-  },
   ["tree-sitter-menhir"] = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/tree-sitter-menhir",
@@ -414,7 +427,7 @@ _G.packer_plugins = {
   undotree = {
     loaded = true,
     path = "/Users/emilienlemaire/.local/share/nvim/site/pack/packer/start/undotree",
-    url = "https://github.com/jiaoshijie/undotree"
+    url = "https://github.com/mbbill/undotree"
   },
   ["vim-devicons"] = {
     loaded = true,
@@ -501,14 +514,42 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope-frecency.nvim
-time([[Config for telescope-frecency.nvim]], true)
-try_loadstring("\27LJ\2\nM\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\rfrecency\19load_extension\14telescope\frequire\0", "config", "telescope-frecency.nvim")
-time([[Config for telescope-frecency.nvim]], false)
+local module_lazy_loads = {
+  ["^ssr"] = "ssr.nvim"
+}
+local lazy_load_called = {['packer.load'] = true}
+local function lazy_load_module(module_name)
+  local to_load = {}
+  if lazy_load_called[module_name] then return nil end
+  lazy_load_called[module_name] = true
+  for module_pat, plugin_name in pairs(module_lazy_loads) do
+    if not _G.packer_plugins[plugin_name].loaded and string.match(module_name, module_pat) then
+      to_load[#to_load + 1] = plugin_name
+    end
+  end
+
+  if #to_load > 0 then
+    require('packer.load')(to_load, {module = module_name}, _G.packer_plugins)
+    local loaded_mod = package.loaded[module_name]
+    if loaded_mod then
+      return function(modname) return loaded_mod end
+    end
+  end
+end
+
+if not vim.g.packer_custom_loader_enabled then
+  table.insert(package.loaders, 1, lazy_load_module)
+  vim.g.packer_custom_loader_enabled = true
+end
+
 -- Config for: indent-blankline.nvim
 time([[Config for indent-blankline.nvim]], true)
 try_loadstring("\27LJ\2\nq\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\20buftype_exclude\1\2\0\0\rterminal\1\0\1\tchar\6|\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
 time([[Config for indent-blankline.nvim]], false)
+-- Config for: telescope-frecency.nvim
+time([[Config for telescope-frecency.nvim]], true)
+try_loadstring("\27LJ\2\nM\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\rfrecency\19load_extension\14telescope\frequire\0", "config", "telescope-frecency.nvim")
+time([[Config for telescope-frecency.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
