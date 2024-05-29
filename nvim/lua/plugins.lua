@@ -86,6 +86,9 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate'
+  },
+  { 'tjdevries/ocaml.nvim',
+    build = ':lua require("ocaml").update()'
   }
 
   -- TODO: treesitter-context, treesitter-textobjexts

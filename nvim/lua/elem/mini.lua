@@ -19,7 +19,7 @@ M.config = function ()
 
   require'mini.sessions'.setup{}
 
-  require'mini.starter'.setup{}
+  -- require'mini.starter'.setup{}
 end
 
 return M

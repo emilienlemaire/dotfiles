@@ -90,9 +90,43 @@ M.config = function ()
 
   require'lspconfig'.ocamllsp.setup{
     capabilities = capabilities,
-    filetypes = { 'ocaml', 'ocaml.interface', 'menhir' }
+    settings = {
+      codelens = { enable = true },
+    },
+
+    filetypes = {
+      'ocaml',
+      'ocaml.interface',
+      'ocaml.menhir',
+      'ocaml.cram',
+    },
   }
 
+  require("lspconfig.configs").cobol = {
+    default_config = {
+      cmd = {
+        "/home/emilien/Development/ocamlpro/superbol-studio-oss/superbol-free-linux-x64",
+        "lsp",
+        "--force-syntax-diagnostics",
+      },
+      filetypes = { "cobol" },
+      root_dir = function(startpath)
+        local util = require("lspconfig").util
+        return util.search_ancestors(startpath, function (path)
+            if util.path.is_file(util.path.join(path, "superbol.toml")) then
+              return path
+            end
+          end)
+        or util.find_git_ancestor(startpath)
+        or util.path.dirname(startpath)
+      end,
+      settings = {},
+    },
+  }
+
+  require("lspconfig").cobol.setup({
+    capabilities = capabilities, -- should be the same as other lsp
+  })
   -- local custom_servers = {}
   --
   -- for server, config in pairs(custom_servers) do

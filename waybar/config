@@ -4,7 +4,7 @@
 
   "modules-left": ["custom/launcher", "cpu", "memory", "disk", "tray"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["custom/updates", "backlight", "pulseaudio", "clock", "battery", "custom/power"],
+  "modules-right": ["backlight", "pulseaudio", "clock", "battery", "custom/power"],
 
   "pulseaudio": {
     "tooltip": false,
@@ -73,14 +73,7 @@
 
   "custom/power": {
     "format": "",
-    "on-click": "wofi-power-menu"
-  },
-
-  "custom/updates": {
-    "format": "{} update(s)",
-    "exec": "paru -Quu | wc -l",
-    "interval": 15,
-    "on-click": "kitty -e paru && notify-send 'The system has been updated' "
+    "on-click": "wlogout"
   },
 
   "custom/launcher": {
